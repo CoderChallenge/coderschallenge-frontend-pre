@@ -1,0 +1,17 @@
+<section class="container-fluid p-0">
+  <div class="dashboard">
+    <!--Navigation top header-->
+    <app-header></app-header>
+    <!--Navigation Sidebar-->
+    <app-sidebar></app-sidebar>
+    <!--Main Container section-->
+    <section class="dashboard__main-content">
+      <router-outlet></router-outlet>
+    </section>
+
+  </div>
+   <!-- Loader section-->
+  <div class="module-loader" *ngIf="moduleLoading">
+    <div class="spinner spinner-bubble spinner-bubble-primary mr-3"></div>
+  </div>
+</section>

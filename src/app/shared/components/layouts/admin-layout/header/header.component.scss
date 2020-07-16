@@ -1,0 +1,11 @@
+:host {
+  grid-column: 1 / -1;
+  grid-row: 1 / 2;
+  // Only apply sticky override if supported by the browser.
+  @supports ( position: sticky ) or ( position: -webkit-sticky ) {
+    position: sticky ;
+    position: -webkit-sticky ;
+    top: 0px ;
+    z-index: 1;
+  }
+}
