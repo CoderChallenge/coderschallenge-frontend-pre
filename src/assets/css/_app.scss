@@ -1,0 +1,28 @@
+@import "abstracts/color";
+@import "~animate.css/animate.min.css";
+// regular style toast
+@import '~ngx-toastr/toastr';
+
+.bg {
+  &--primary {
+    background: $primary-color;
+  }
+}
+
+.text {
+  &--primary {
+    color: $primary-color;
+  }
+
+  &--white {
+    color: $primary-white;
+  }
+
+  &--black {
+    color: $primary-black;
+  }
+
+  &--bold {
+    font-weight: bold;
+  }
+}

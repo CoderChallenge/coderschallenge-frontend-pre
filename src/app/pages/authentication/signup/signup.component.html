@@ -1,0 +1,147 @@
+<!-- Start Containerbar -->
+<div id="containerbar" class="containerbar authenticate-bg">
+    <!-- Start Container -->
+    <div class="container">
+        <div class="auth-box register-box">
+            <!-- Start row -->
+            <div class="row no-gutters align-items-center justify-content-center">
+                <!-- Start col -->
+                <div class="col-md-6 col-lg-5">
+                    <!-- Start Auth Box -->
+                    <div class="auth-box-right">
+                        <div class="card">
+                            <div class="card-body">
+                                <form #f="ngForm" (ngSubmit)="signupHandler(f)" class="form">
+                                    <div class="form-head">
+                                        <a class="logo" href="index.html"><img alt="logo" class="img-fluid" src="assets/images/app-logo.png"></a>
+                                    </div>
+                                    <app-alert-component
+                                            *ngIf="alert"
+                                            [message]="alert.response"
+                                            [cssClass]="alert.cssClass"
+                                            [iconClass]="alert.iconClass"
+                                    >
+                                    </app-alert-component>
+
+                                    <div class="form-group">
+                                        <!-- FUll name -->
+                                        <label for="fullname" class="pull-left">Full Name</label>
+                                        <input #fullName="ngModel"
+                                               [(ngModel)]="item.name"
+                                               [ngClass]="{
+                    'text-danger': fullName.invalid && (fullName.dirty || fullName.touched),
+                    'text-success': fullName.valid && (fullName.dirty || fullName.touched)
+                  }"
+                                               aria-describedby="fullname input box"
+                                               class="form-control" id="fullname"
+                                               name="fullName" placeholder="Enter Full Name"
+                                               required
+                                               type="text"
+                                        />
+                                        <small *ngIf="fullName.errors?.required && (fullName.dirty || fullName.touched)" class="form-text text-danger pull-left">
+                                            <i class=""></i>Please enter
+                                            your fullname
+                                        </small>
+                                    </div>
+
+                                    <!-- Email address -->
+                                    <div class="form-group">
+                                        <label for="email" class="pull-left">Email Address</label>
+                                        <input #email="ngModel"
+                                               [(ngModel)]="item.email"
+                                               [ngClass]="{
+              'text-danger': email.invalid && (email.dirty || email.touched),
+              'text-success': email.valid && (email.dirty || email.touched) }"
+                                               aria-describedby="email input box"
+                                               class="form-control" email
+                                               id="email"
+                                               name="email" placeholder="Email Address"
+                                               required
+                                               type="email"
+                                        />
+                                        <small *ngIf="email.errors?.required && (email.dirty || email.touched)"
+                                               class="form-text text-danger pull-left"><i class=""></i> Please enter a valid
+                                            email address</small>
+                                        <small *ngIf="email.errors?.email && (email.dirty || email.touched)" class="form-text text-danger pull-left">Email must
+                                            be a valid email address</small>
+                                    </div>
+
+                                    <!-- Username -->
+                                    <div class="form-group">
+                                        <label for="username" class="pull-left">Username</label>
+                                        <input #nickName="ngModel"
+                                               [(ngModel)]="item.nickName"
+                                               [ngClass]="{
+            'text-danger': nickName.invalid && (nickName.dirty || nickName.touched),
+            'text-success': nickName.valid && (nickName.dirty || nickName.touched) }"
+                                               aria-describedby="username input box"
+                                               class="form-control" id="username" minlength="6"
+                                               name="nickName" placeholder="Enter Username"
+                                               required
+                                               type="text"
+                                        />
+                                        <small *ngIf="nickName.errors?.required && (nickName.dirty || nickName.touched)"
+                                               class="form-text text-danger pull-left"><i class=""></i>Please enter
+                                            your username</small>
+                                        <small *ngIf="nickName.errors?.minlength && (nickName.dirty || nickName.touched)"
+                                               class="form-text text-danger pull-left"><i class=""></i>Username
+                                            must be at least 6 characters</small>
+                                    </div>
+
+                                    <!-- Password -->
+                                    <div class="form-group">
+                                        <label for="password" class="pull-left">Password</label>
+                                        <input #password="ngModel"
+                                               [(ngModel)]="item.password"
+                                               [ngClass]="{
+            'text-danger': password.invalid && (password.dirty || password.touched),
+            'text-success': password.valid && (password.dirty || password.touched) }"
+                                               aria-describedby="password input box"
+                                               class="form-control" id="password" minlength="6"
+                                               name="password" placeholder="Enter Password"
+                                               required
+                                               type="password"
+                                        />
+                                        <small *ngIf="password.errors?.required && (password.dirty || password.touched)"
+                                               class="form-text text-danger pull-left"><i class=""></i>Please enter
+                                            your password</small>
+                                        <small *ngIf="password.errors?.minlength && (password.dirty || password.touched)"
+                                               class="form-text text-danger pull-left"><i class=""></i>Password
+                                            must be at least 6 characters</small>
+                                    </div>
+
+                                    <!-- Phone Number -->
+                                    <div class="form-group">
+                                        <label for="phonenumber" class="pull-left">Phone Number</label>
+                                        <input #phoneNumber="ngModel"
+                                               [(ngModel)]="item.phoneNumber"
+                                               [ngClass]="{
+            'text-danger': phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched),
+            'text-success': phoneNumber.valid && (phoneNumber.dirty || phoneNumber.touched) }" aria-describedby="phonenumber input box"
+                                               class="form-control" id="phonenumber"
+                                               name="phoneNumber" placeholder="Enter Phone Number"
+                                               required
+                                               type="tel" />
+                                        <small *ngIf="phoneNumber.errors?.required && (phoneNumber.dirty || phoneNumber.touched)"
+                                               class="form-text text-danger pull-left"><i class=""></i>Please
+                                            enter your phone number</small>
+                                    </div>
+                                    <btn-loading [disabled]="!f.valid || loading" [loadingText]="'Loading'"
+                                                 [loading]="loading"
+                                                 [btnClass]="'btn btn-block bg--primary text--white submit-button font-18'">
+                                        Sign Up <i class="fa fa-arrow-right"></i>
+                                    </btn-loading>
+                                </form>
+                                <p class="mb-0 mt-3">Already have an account? <a [routerLink]="[ '/auth/login' ]">Log in</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Auth Box -->
+                </div>
+                <!-- End col -->
+            </div>
+            <!-- End row -->
+        </div>
+    </div>
+    <!-- End Container -->
+</div>

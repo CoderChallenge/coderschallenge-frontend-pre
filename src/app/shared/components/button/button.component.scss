@@ -1,0 +1,12 @@
+@import '../../../../assets/css/abstracts/color';
+
+button.submit-button {
+  font-size: 25px;
+  height: 50px;
+  padding: unset;
+  margin-top: 20px;
+  transition: all .15s ease-in-out;
+  &:hover {
+    color: $primary-white;
+  }
+}
