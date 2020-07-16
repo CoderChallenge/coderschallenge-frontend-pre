@@ -74,6 +74,7 @@ export class SignupComponent implements OnInit {
   }
 
   signupHandler(f: NgForm){
+    this.alert = null;
     if (!f.valid) { return; }
     this.loading = true;
     this.item.type = 'Participant';

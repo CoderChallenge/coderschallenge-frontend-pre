@@ -4,7 +4,7 @@ import { IAlert } from '@app/shared/common/model/IAlert';
 export class Helpers{
 
   static setupAlert(cssClass: string, iconClass: string, response: any): IAlert{
-   return  {cssClass, iconClass, response};
+    return  {cssClass, iconClass, response};
   }
 
 }

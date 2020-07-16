@@ -1,1 +1,114 @@
-<p>complete-signup works!</p>
+<!-- Start Containerbar -->
+<div id="containerbar" class="containerbar authenticate-bg">
+    <!-- Start Container -->
+    <div class="container">
+        <div class="auth-box register-box">
+            <!-- Start row -->
+            <div class="row no-gutters align-items-center justify-content-center">
+                <!-- Start col -->
+                <div class="col-md-6 col-lg-5">
+                    <!-- Start Auth Box -->
+                    <div class="auth-box-right">
+                        <div class="card">
+                            <div class="card-body">
+                                <form #f="ngForm" (ngSubmit)="submitForm(f)" class="form">
+                                    <div class="form-head">
+                                        <a class="logo" href="index.html"><img alt="logo" class="img-fluid" src="assets/images/app-logo.png"></a>
+                                    </div>
+                                    <app-alert-component
+                                            *ngIf="alert"
+                                            [message]="alert.response"
+                                            [cssClass]="alert.cssClass"
+                                            [iconClass]="alert.iconClass"
+                                    >
+                                    </app-alert-component>
+
+                                    <!-- Gender -->
+                                    <div class="form-group">
+                                        <label for="userType">Gender</label>
+                                        <select  [ngClass]="{
+            'text-danger': gender.invalid && (gender.dirty || gender.touched),
+            'text-success': gender.valid && (gender.dirty || gender.touched) }"
+                                                 id="gender" required
+                                                 class="form-control"
+                                                 name="gender"
+                                                 #gender="ngModel"
+                                                 [(ngModel)]="item.gender">
+                                            <option disabled [value]="''">Select Gender</option>
+                                            <option [value]="'Male'">Male</option>
+                                            <option [value]="'Female'">Female</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- User type -->
+                                    <div class="form-group">
+                                        <label for="userType">You are signing up as?</label>
+                                        <select  [ngClass]="{
+            'text-danger': userType.invalid && (userType.dirty || userType.touched),
+            'text-success': userType.valid && (userType.dirty || userType.touched) }"
+                                                 id="userType" required
+                                                 class="form-control"
+                                                 name="userType"
+                                                 #userType="ngModel"
+                                                 [(ngModel)]="item.userType">
+                                            <option [value]="''" disabled>Select User Type</option>
+                                            <option [value]="'Participant'">Participant</option>
+                                            <option [value]="'Organizer'">Organizer</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Organization name -->
+                                    <div class="form-group" *ngIf="userType.value == 'Organizer'">
+                                        <label for="organization">Organization/Community</label>
+                                        <input #companyName="ngModel"
+                                               [(ngModel)]="item.companyName"
+                                               [ngClass]="{
+            'text-danger': companyName.invalid && (companyName.dirty || companyName.touched),
+            'text-success': companyName.valid && (companyName.dirty || companyName.touched) }"
+                                               id="organization"
+                                               aria-describedby="organization/Community input box"
+                                               placeholder="Enter your organization/community name"
+                                               class="form-control"
+                                               name="companyName"
+                                               required
+                                               type="text"
+                                        />
+                                        <small *ngIf="companyName.errors?.required && (companyName.dirty || companyName.touched)"
+                                               class="form-text text-danger"><i class=""></i>Please enter your organization/community name</small>
+
+                                    </div>
+
+                                    <!-- purpose for using platform -->
+                                    <div class="form-group">
+                                        <label for="purpose">Purpose for using this platform</label>
+                                        <input #purpose="ngModel"
+                                               [(ngModel)]="item.purpose"
+                                               [ngClass]="{
+            'text-danger': purpose.invalid && (purpose.dirty || purpose.touched),
+            'text-success': purpose.valid && (purpose.dirty || purpose.touched) }"
+                                               type="text" name="purpose"
+                                               class="form-control"
+                                               id="purpose"
+                                               aria-describedby="Purpose for using platform input box"
+                                               placeholder="Enter your purpose for using this platform"
+                                        />
+                                    </div>
+                                    <btn-loading [disabled]="!f.valid || loading" [loadingText]="'Loading'"
+                                                 [loading]="loading"
+                                                 [btnClass]="'btn btn-block bg--primary text--white submit-button'">
+                                        Submit <i class="fa fa-arrow-right"></i>
+                                    </btn-loading>
+                                </form>
+                                <p class="mb-0 mt-3">Already have an account? <a [routerLink]="[ '/auth/login' ]">Log in</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Auth Box -->
+                </div>
+                <!-- End col -->
+            </div>
+            <!-- End row -->
+        </div>
+    </div>
+    <!-- End Container -->
+</div>
