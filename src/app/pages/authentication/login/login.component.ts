@@ -48,6 +48,7 @@ export class LoginComponent extends RouteRedirector implements OnInit {
   }
 
   loginHandler(f: NgForm){
+    this.alert = null;
     if (!f.valid) {
       this.alert = Helpers.setupAlert(AlertCssClass.warning, IconCssClass.warning, 'Email and Password is required');
       return false;
@@ -61,6 +62,7 @@ export class LoginComponent extends RouteRedirector implements OnInit {
   }
 
   private makeLoginRequest(body: ILogin){
+
     this.accountService.login(body)
         .subscribe((res) => {
           this.dataService.keepData('token', res.data.token);

@@ -25,7 +25,7 @@
 
                                     <div class="form-group">
                                         <!-- FUll name -->
-                                        <label for="fullname" class="pull-left">Full Name</label>
+                                        <label for="fullname" class="pull-left clearfix">Full Name</label>
                                         <input #fullName="ngModel"
                                                [(ngModel)]="item.name"
                                                [ngClass]="{
@@ -46,7 +46,7 @@
 
                                     <!-- Email address -->
                                     <div class="form-group">
-                                        <label for="email" class="pull-left">Email Address</label>
+                                        <label for="email" class="pull-left clearfix">Email Address</label>
                                         <input #email="ngModel"
                                                [(ngModel)]="item.email"
                                                [ngClass]="{
@@ -68,7 +68,7 @@
 
                                     <!-- Username -->
                                     <div class="form-group">
-                                        <label for="username" class="pull-left">Username</label>
+                                        <label for="username" class="pull-left clearfix">Username</label>
                                         <input #nickName="ngModel"
                                                [(ngModel)]="item.nickName"
                                                [ngClass]="{
@@ -90,7 +90,7 @@
 
                                     <!-- Password -->
                                     <div class="form-group">
-                                        <label for="password" class="pull-left">Password</label>
+                                        <label for="password" class="pull-left clearfix">Password</label>
                                         <input #password="ngModel"
                                                [(ngModel)]="item.password"
                                                [ngClass]="{
@@ -112,7 +112,7 @@
 
                                     <!-- Phone Number -->
                                     <div class="form-group">
-                                        <label for="phonenumber" class="pull-left">Phone Number</label>
+                                        <label for="phonenumber" class="pull-left clearfix">Phone Number</label>
                                         <input #phoneNumber="ngModel"
                                                [(ngModel)]="item.phoneNumber"
                                                [ngClass]="{
@@ -132,6 +132,20 @@
                                         Sign Up <i class="fa fa-arrow-right"></i>
                                     </btn-loading>
                                 </form>
+                                <div class="login-or">
+                                    <p class="text-muted">Or</p>
+                                </div>
+                                <div class="social-login text-center">
+                                    <a href="{{githubUrl}}" class="mr-2">
+                                        <button (click)="savePage()" class="btn btn-primary-rgba font-18" type="button"><i
+                                                class="mdi mdi-github-circle mr-2"></i>Github
+                                        </button>
+                                    </a>
+
+                                    <button class="btn btn-dark-rgba font-18" type="submit" (click)="signInWithGoogle()"><i
+                                            class="mdi mdi-google mr-2"></i> Google
+                                    </button>
+                                </div>
                                 <p class="mb-0 mt-3">Already have an account? <a [routerLink]="[ '/auth/login' ]">Log in</a></p>
                             </div>
                         </div>

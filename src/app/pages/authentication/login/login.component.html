@@ -43,7 +43,7 @@
                                                 must be a valid email address</small>
                                         </div>
                                         <!-- Password -->
-                                        <div class="form-group" >
+                                        <div class="form-group">
                                             <label for="password" class="pull-left">Password</label>
                                             <input [ngClass]="{
             'text-danger': password.invalid && (password.dirty || password.touched),
@@ -78,14 +78,14 @@
                                         <p class="text-muted">Or</p>
                                     </div>
                                     <div class="social-login text-center">
-                                        <a href="{{githubUrl}}">
-                                        <button class="btn btn-primary-rgba font-18" type="button"><i
-                                                class="mdi mdi-github-face mr-2"></i>Github
+                                        <a href="{{githubUrl}}" class="mr-2">
+                                        <button (click)="savePage()" class="btn btn-primary-rgba font-18" type="button"><i
+                                                class="mdi mdi-github-circle mr-2"></i>Github
                                         </button>
                                         </a>
 
-                                        <button class="btn btn-danger-rgba font-18" type="submit" (click)="signInWithGoogle()"><i
-                                                class="mdi mdi-google mr-2"></i>Google
+                                        <button class="btn btn-dark-rgba font-18" type="submit" (click)="signInWithGoogle()"><i
+                                                class="mdi mdi-google mr-2"></i> Google
                                         </button>
                                     </div>
                                     <p class="mb-0 mt-3">Don't have a account? <a [routerLink]="[ '/auth/signup' ]">Sign up</a></p>
