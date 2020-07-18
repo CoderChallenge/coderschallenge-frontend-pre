@@ -30,7 +30,7 @@ export class RootService<T extends IRootObject> implements IRootService<T> {
 
   query(queryOptions: IQueryOptions, url: string): Observable<ICountModel<T>> {
     return this.httpClient
-      .get<ICountModel<T>>(`${url}/${QueryBuilder.toQueryString(queryOptions)}`)
+      .get<ICountModel<T>>(`${url}${QueryBuilder.toQueryString(queryOptions)}`)
       .pipe(
         map(data => {
           return data as ICountModel<T>;
