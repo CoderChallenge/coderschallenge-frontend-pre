@@ -1,0 +1,28 @@
+@import "../abstracts/color";
+//.create-challenge {
+//  width: 849px;
+//  background: $primary-white;
+//  padding: 71px 127px;
+//  min-height: 600px;
+//  margin: 0 auto;
+//
+//  &__heading {
+//    font-size: 25px;
+//    margin-bottom: 27px;
+//  }
+//}
+
+.create-challenge-form {
+  &__input {
+    background: $dashboard-background;
+  }
+
+  &__file {
+    height: 50px;
+    padding: 10px;
+  }
+
+  //&__config {
+  //  width: 400px;
+  //}
+}

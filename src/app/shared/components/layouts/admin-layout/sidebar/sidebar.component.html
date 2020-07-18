@@ -10,8 +10,9 @@
     <!-- Start Navigationbar -->
     <div class="navigationbar">
       <ul class="vertical-menu">
-        <li  *ngFor="let item of nav" >
-          <a (click)="onClickChangeActiveFlag(item)"
+        <li [ngClass]="{'active': item.active}"
+                *ngFor="let item of nav" >
+          <a (click)="onClickChangeActiveFlag(item)" [ngClass]="{'active': item.active}"
              routerLink="{{item.state}}" >
             <img src="assets/images/svg-icon/{{item.icon}}" class="img-fluid" alt="widgets"><span>{{item.name}}</span>
           </a>

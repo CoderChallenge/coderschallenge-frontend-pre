@@ -1,1 +1,58 @@
-<p>challenge-config works!</p>
+<div class="row d-flex justify-content-center align-items-start animated fadeIn">
+    <div class="col-md-7 m-auto">
+        <div class="card m-b-30">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Setup a challenge</h5>
+            </div>
+            <div class="card-body">
+                <form class="create-challenge-form" #f="ngForm" (ngSubmit)="submitForm()">
+                    <app-alert-component
+                            *ngIf="alert"
+                            [message]="alert.response"
+                            [cssClass]="alert.cssClass"
+                            [iconClass]="alert.iconClass"
+                    >
+                    </app-alert-component>
+                    <div class="form-group">
+                        <!-- Tracks -->
+                        <h5 class="font-16">Tracks</h5>
+                            <div
+                                   *ngFor="let track of tracks"
+                                    class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox"  class="custom-control-input" (change)="onCheckboxChange($event, 'track')" id="{{track.name}}" [value]="track.id" required>
+                                <label class="custom-control-label" for="{{track.name}}">{{track.name}}</label>
+                            </div>
+
+                        <small *ngIf="item.trackIds.length === 0"
+                               class="form-text text-danger"><i class=""></i>Please select the tracks required for this challenge</small>
+                    </div>
+
+                    <div class="form-group">
+                        <!-- Levels -->
+                        <h5 class="font-16">Levels</h5>
+
+                            <div
+                                    *ngFor="let level of levels"
+                                    class="custom-control custom-checkbox custom-control-inline">
+                                <input type="checkbox"  class="custom-control-input" (change)="onCheckboxChange($event, 'level')" id="{{level.name}}" [value]="level.id" required>
+                                <label class="custom-control-label" for="{{level.name}}">{{level.name}}</label>
+                            </div>
+                        <small *ngIf="item.levelIds.length === 0"
+                               class="form-text text-danger"><i class=""></i>Please select the level of experts required for this challenge</small>
+                    </div>
+
+                    <div class="row justify-content-center mt-4">
+                        <div class="col justify-content-center">
+                            <btn-loading [disabled]="!f.valid || waiting " [loadingText]="'Loading'"
+                                         [loading]="waiting"
+                                         [btnClass]="'btn btn-block bg--primary text--white submit-button create-challenge-form__submit-button'">
+                                Save and Continue <i class="fa fa-arrow-right"></i>
+                            </btn-loading>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
