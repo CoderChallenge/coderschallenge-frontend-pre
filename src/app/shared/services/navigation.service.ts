@@ -24,7 +24,7 @@ export class NavigationService {
       tooltip: 'Challenge',
       icon: 'basic.svg',
       stateName: 'challenge',
-      state: '/organizer/challenge/create'
+      state: '/organizer/challenge/list'
     }
   ];
 

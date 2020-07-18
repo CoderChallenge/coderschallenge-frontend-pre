@@ -11,7 +11,8 @@ export const routes = {
   RESETPASSWORD: `${BASEURL}/account/reset-password`,
   CHALLENGE: {
     CREATE: `${BASEURL}/challenge/create`,
-    CONFIG: `${BASEURL}/challenge/attach`
+    CONFIG: `${BASEURL}/challenge/attach`,
+    LIST: `${BASEURL}/challenge/get-all`
   },
   LEVEL: {
     LIST: `${BASEURL}/level/list`

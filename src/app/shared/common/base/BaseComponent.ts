@@ -39,7 +39,7 @@ export abstract class BaseComponent implements IComponentAction, OnInit {
   filterarray: IFilter[];
   waiting: boolean;
   url: any;
-  items: any;
+  items: [];
   item: any = {};
   exitem: any;
   alert: IAlert;
@@ -55,7 +55,7 @@ export abstract class BaseComponent implements IComponentAction, OnInit {
   };
 
   hideFilter = false;
-  size = 20;
+  size = 10;
   filter: any = {};
   changePage: () => void;
   paginationConfig = {
@@ -63,7 +63,7 @@ export abstract class BaseComponent implements IComponentAction, OnInit {
     page: 1,
     total: 0,
   };
-  sizes: Array<number> = [50, 100, 150, 200, 250];
+  sizes: Array<number> = [10, 20, 50, 100, 150, 200, 250];
 
   genders: Array<string> = ['Man', 'Woman'];
 
@@ -82,7 +82,7 @@ export abstract class BaseComponent implements IComponentAction, OnInit {
     'December',
   ];
   checkItems: any;
-  pager: any = { page: 1, size: 50 };
+  pager: any = { page: 1, size: 10 };
 
   getParamValue(key: string): string {
     let value = '';
@@ -112,6 +112,7 @@ export abstract class BaseComponent implements IComponentAction, OnInit {
   ngOnInit() { }
   reloadComponent() {
     this.filter = {};
+    this.size = 10;
     this.ngOnInit();
   }
 
@@ -162,7 +163,7 @@ export abstract class BaseComponent implements IComponentAction, OnInit {
     return this.resource
       .query(
         Object.assign({
-          count: this.paginationConfig.count,
+          size: this.paginationConfig.count,
           page: this.paginationConfig.page,
           orderByExpression: this.query.orderByExpression,
           whereCondition: this.query.whereCondition,
@@ -171,7 +172,7 @@ export abstract class BaseComponent implements IComponentAction, OnInit {
       )
       .pipe(
         map((res) => {
-          this.paginationConfig.total = res.total;
+          this.paginationConfig.total = res.data.total;
           return res;
         })
       );
@@ -186,7 +187,7 @@ export abstract class BaseComponent implements IComponentAction, OnInit {
         (this.paginationConfig.count * (this.pager.page - 1) +
           this.items.length) +
         ' of ' +
-        this.paginationConfig.total
+        this.paginationConfig.total + ' records '
       );
     }
     return '';
@@ -199,7 +200,7 @@ export abstract class BaseComponent implements IComponentAction, OnInit {
     return this.resource
       .query(
         Object.assign({
-          count: this.paginationConfig.count,
+          size: this.paginationConfig.count,
           page: this.paginationConfig.page,
           orderByExpression: this.query.orderByExpression,
           whereCondition: this.formatQueryString(),
@@ -207,8 +208,8 @@ export abstract class BaseComponent implements IComponentAction, OnInit {
         this.url
       )
       .subscribe(
-        (data) => {
-          this.items = data.data;
+        (res) => {
+          this.items = res.data.data;
           this.pager.page = this.paginationConfig.page;
           // this.paginationConfig.total = data.total;
           this.waiting = false;
@@ -235,7 +236,7 @@ export abstract class BaseComponent implements IComponentAction, OnInit {
     if (this.filter) {
       for (const key of Object.keys(this.filter)) {
         const value = this.filter[key];
-        query += `&${key}=${value}`;
+        query += `${key}=${value}`;
       }
     }
     return query;

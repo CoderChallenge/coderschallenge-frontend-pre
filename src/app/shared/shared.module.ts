@@ -4,8 +4,6 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { SharedComponentsModule } from './components/shared-components.module';
 
-
-
 @NgModule({
   imports: [
     CommonModule,

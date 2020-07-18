@@ -1,6 +1,6 @@
 export interface IQueryOptions {
     page?: number;
-    count?: number;
+    size?: number;
     orderByExpression?: {};
     whereCondition?: string;
 }

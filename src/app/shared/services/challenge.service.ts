@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { IRootService, IUser, RootService, routes } from '@app/shared';
 import { ApiResponse } from '@app/shared/common/interface/IRootObject';
 import { Observable } from 'rxjs/internal/Observable';
@@ -16,8 +16,8 @@ export interface IChallengeService extends IRootService<ApiResponse<IChallenge>>
   providedIn: 'root'
 })
 export class ChallengeService extends RootService<ApiResponse<any>> implements IChallengeService{
-  constructor(httpClient: HttpClient) {
-    super(httpClient);
+  constructor(httpClient: HttpClient, inject: Injector) {
+    super(httpClient, inject);
   }
 
   attachLevelAndTrack(body: IChallengeConfig): Observable<ApiResponse<string>> {

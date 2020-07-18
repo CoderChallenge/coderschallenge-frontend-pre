@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { AuthenticationService } from '@app/shared/services/authentication.service';
 declare let $: any;
 @Component({
   selector: 'app-header',
@@ -6,8 +7,11 @@ declare let $: any;
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  constructor(private authService: AuthenticationService) { }
 
-  constructor() { }
+  get name(){
+    return this.authService.decodeToken.name;
+  }
 
   toggleMenu(){
     /* -- Menu Hamburger -- */
