@@ -14,7 +14,7 @@ export class NavigationService {
       name: 'Dashboard',
       type: 'link',
       tooltip: 'Dashboard',
-      icon: 'fa fa-home',
+      icon: 'dashboard.svg',
       stateName: 'dashboard',
       state: '/organizer/dashboard'
     },
@@ -22,7 +22,7 @@ export class NavigationService {
       name: 'Challenge',
       type: 'link',
       tooltip: 'Challenge',
-      icon: 'fa fa-code',
+      icon: 'basic.svg',
       stateName: 'challenge',
       state: '/organizer/challenge/create'
     }
