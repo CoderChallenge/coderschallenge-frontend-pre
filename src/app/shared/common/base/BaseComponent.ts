@@ -42,11 +42,7 @@ export abstract class BaseComponent implements IComponentAction, OnInit {
   items: any;
   item: any = {};
   exitem: any;
-  alert: IAlert = {
-    cssClass: '',
-    iconClass: '',
-    response: ''
-  };
+  alert: IAlert;
   notificationData: Array<any> = [];
 
   states: any;

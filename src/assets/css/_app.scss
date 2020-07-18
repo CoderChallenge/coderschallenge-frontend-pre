@@ -1,7 +1,9 @@
-@import "abstracts/color";
 @import "~animate.css/animate.min.css";
 // regular style toast
 @import '~ngx-toastr/toastr';
+
+@import "abstracts/color";
+@import "components/components";
 
 .bg {
   &--primary {
@@ -31,4 +33,7 @@
 }
 .mt-6{
   margin-top: 4rem !important;
+}
+.m-auto{
+  margin:auto;
 }
