@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { AuthenticationService } from '@app/shared/services/authentication.service';
 import { NavigationService } from '@app/shared/services/navigation.service';
 import { IMenuItem } from '@app/shared/common/model/IMenuItem';
+import { DataStoreService } from '@app/shared/services/data-store.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,6 +17,8 @@ export class SidebarComponent implements OnInit {
   email: string;
   nickName: string;
   constructor(private authenticationService: AuthenticationService,
+              private router: Router,
+              private dataService: DataStoreService,
               private navService: NavigationService
              ) { }
 
@@ -76,6 +81,9 @@ export class SidebarComponent implements OnInit {
     }
   }
 
-
+  logout(){
+    this.dataService.removeAllPersistedData();
+    this.router.navigate(['/auth/login']);
+  }
 
 }

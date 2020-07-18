@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { OrganizerRoutingModule } from './organizer-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -7,7 +9,7 @@ import { ChallengeComponent } from './challenge/challenge.component';
 import { CreateChallengeComponent } from './challenge/create-challenge/create-challenge.component';
 import { ChallengeConfigComponent } from './challenge/challenge-config/challenge-config.component';
 import { SharedComponentsModule } from '@app/shared/components/shared-components.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ListChallengeComponent } from './challenge/list-challenge/list-challenge.component';
 
 
 @NgModule({
@@ -15,13 +17,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       DashboardComponent,
       ChallengeComponent,
       CreateChallengeComponent,
-      ChallengeConfigComponent
+      ChallengeConfigComponent,
+      ListChallengeComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     SharedComponentsModule,
+    NgbModule,
     OrganizerRoutingModule
   ]
 })

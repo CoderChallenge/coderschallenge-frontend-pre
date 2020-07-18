@@ -1,7 +1,6 @@
 @import "~animate.css/animate.min.css";
 // regular style toast
 @import '~ngx-toastr/toastr';
-
 @import "abstracts/color";
 @import "components/components";
 
@@ -36,4 +35,20 @@
 }
 .m-auto{
   margin:auto;
+}
+
+.module-loader {
+  position: fixed;
+  background: rgba($background, .5);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 9;
+  .loader, .spinner {
+    position: fixed;
+    top: 45%;
+    left: calc(50% + 56px);
+    z-index: inherit;
+  }
 }

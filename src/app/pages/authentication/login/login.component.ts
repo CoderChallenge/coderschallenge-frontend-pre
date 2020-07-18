@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
+
 import { RouteRedirector } from '@pages/authentication/routeRedirector';
 import { environment } from '@src/environments/environment';
 import { AlertCssClass, IconCssClass, ILogin, Pages } from '@app/shared';
 import { IAlert } from '@app/shared/common/model/IAlert';
-import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 import { Helpers } from '@app/shared/helpers';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
 import { DataStoreService } from '@app/shared/services/data-store.service';
-import { NgForm } from '@angular/forms';
 import { AccountService } from '@app/shared/services/account.service';
 import { AuthenticationService } from '@app/shared/services/authentication.service';
 
@@ -38,8 +39,8 @@ export class LoginComponent extends RouteRedirector implements OnInit {
 
   ngOnInit(){
     this.destoryPageTracker();
+    this.triggerGuard();
     this.setTitle();
-
   }
 
   signInWithGoogle(){
@@ -85,5 +86,12 @@ export class LoginComponent extends RouteRedirector implements OnInit {
   protected destoryPageTracker(){
     const page = this.dataService.getData('page');
     if (page) { this.dataService.removeData('page'); }
+  }
+
+  protected triggerGuard() {
+    const { role} = this.authenticationService;
+    if (!!this.dataService.getData('token')) {
+      this.redirectUserToDashboard(role);
+    }
   }
 }

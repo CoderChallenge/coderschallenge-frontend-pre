@@ -4,11 +4,11 @@ import { map } from 'rxjs/operators';
 import { Injector } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
-import { IRootObject } from './IRootObject';
-import { IRootService } from './IRootService';
-import { IQueryOptions } from './IQueryOptions';
-import { ICountModel } from './ICountModel';
-import { QueryBuilder } from './QueryBuilder';
+import { ICountModel } from '@app-shared/common/interface/ICountModel';
+import { IQueryOptions } from '@app-shared/common/interface/IQueryOptions';
+import { IRootObject } from '@app-shared/common/interface/IRootObject';
+import { IRootService } from '@app-shared/common/interface/IRootService';
+import { QueryBuilder } from '@app-shared/common/interface/QueryBuilder';
 
 
 export class RootService<T extends IRootObject> implements IRootService<T> {
@@ -96,7 +96,8 @@ export class RootService<T extends IRootObject> implements IRootService<T> {
   }
 
   private get alert(): ToastrService {
-    return this.inject.get(ToastrService);
+    const res = this.inject.get<ToastrService>(ToastrService);
+    return res;
   }
 
   successAlert(msg: any, title?: any) {

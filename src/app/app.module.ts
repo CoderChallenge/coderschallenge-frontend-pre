@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { AuthInterceptor } from '@app/shared/interceptors/AuthInterceptor';
 import { environment } from '@src/environments/environment';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { environment } from '@src/environments/environment';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    SocialLoginModule
+    SocialLoginModule,
+    NgbModule
   ],
   providers: [
     {

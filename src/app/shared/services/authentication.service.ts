@@ -45,4 +45,9 @@ export class AuthenticationService {
     return this.decodeToken.nickName;
   }
 
+  get fullname(): string{
+    if (!this.decodeToken) { return null; }
+    return this.decodeToken.name;
+  }
+
 }
