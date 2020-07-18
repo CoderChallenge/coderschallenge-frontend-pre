@@ -1,17 +1,20 @@
-<section class="container-fluid p-0">
-  <div class="dashboard">
-    <!--Navigation top header-->
-    <app-header></app-header>
-    <!--Navigation Sidebar-->
+<!-- Start Containerbar -->
+<div id="containerbar">
+  <div class="leftbar">
     <app-sidebar></app-sidebar>
-    <!--Main Container section-->
-    <section class="dashboard__main-content">
+  </div>
+  <div class="rightbar">
+   <app-header></app-header>
+    <div class="contentbar mt-6">
       <router-outlet></router-outlet>
-    </section>
-
+    </div>
+    <div class="footerbar">
+      <footer class="footer">
+        <p class="mb-0">© 2020 Orbiter - All Rights Reserved.</p>
+      </footer>
+    </div>
+    <div class="module-loader" *ngIf="moduleLoading">
+      <div class="spinner spinner-bubble spinner-bubble-primary mr-3"></div>
+    </div>
   </div>
-   <!-- Loader section-->
-  <div class="module-loader" *ngIf="moduleLoading">
-    <div class="spinner spinner-bubble spinner-bubble-primary mr-3"></div>
-  </div>
-</section>
+</div>

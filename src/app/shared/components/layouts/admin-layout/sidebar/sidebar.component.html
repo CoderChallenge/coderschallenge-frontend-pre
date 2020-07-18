@@ -1,20 +1,24 @@
-<section class="dashboard__sidebar app-sidebar">
-  <div class="app-sidebar__profile d-flex flex-column justify-content-center align-items-center">
-    <div class="app-sidebar__profile--avatar d-flex align-items-center justify-content-center">GL
+
+  <!-- Start Sidebar -->
+  <div class="sidebar">
+    <!-- Start Logobar -->
+    <div class="logobar">
+      <a href="index.html" class="logo logo-large"><img src="assets/images/logo.svg" class="img-fluid" alt="logo"></a>
+      <a href="index.html" class="logo logo-small"><img src="assets/images/small_logo.svg" class="img-fluid" alt="logo"></a>
     </div>
-    <div class="app-sidebar__profile--details">
-      <p>{{nickName}}</p>
-      <p>{{email}}</p>
+    <!-- End Logobar -->
+    <!-- Start Navigationbar -->
+    <div class="navigationbar">
+      <ul class="vertical-menu">
+        <li  *ngFor="let item of nav" >
+          <a (click)="onClickChangeActiveFlag(item)"
+             routerLink="{{item.state}}" >
+            <img src="assets/images/svg-icon/{{item.icon}}" class="img-fluid" alt="widgets"><span>{{item.name}}</span>
+          </a>
+        </li>
+      </ul>
     </div>
+    <!-- End Navigationbar -->
   </div>
-  <div class="app-sidebar__controls d-flex flex-column align-items-center">
-    <div [ngClass]="{'app-sidebar__controls--active': item.active}"
-         *ngFor="let item of nav"
-         (click)="onClickChangeActiveFlag(item)"
-         routerLink="{{item.state}}"
-      class="app-sidebar__controls--home d-flex align-items-center clickable">
-      <span [class]="'ml-5 mr-2 app-sidebar__icon '+ item.icon"></span>
-      <p class="m-0">{{item.name}}</p>
-    </div>
-  </div>
-</section>
+  <!-- End Sidebar -->
+
