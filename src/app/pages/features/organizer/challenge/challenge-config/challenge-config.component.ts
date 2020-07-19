@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ChallengeService } from '@app/shared/services/challenge.service';
 import { Helpers } from '@app/shared/helpers';
 import { IChallengeConfig } from '@app/shared/common/model/IChallenge';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-challenge-config',
@@ -20,13 +21,14 @@ export class ChallengeConfigComponent extends BaseComponent implements OnInit {
   };
 
 
-  constructor(router: Router, activatedRoute: ActivatedRoute, private challengeService: ChallengeService) {
-    super(null, router, activatedRoute, null, challengeService );
+  constructor(router: Router, activatedRoute: ActivatedRoute, titleService: Title, private challengeService: ChallengeService) {
+    super(null, router, activatedRoute, titleService, challengeService );
   }
 
   ngOnInit() {
     this.getAllConfigs();
     this.item.challengeId = this.getParamValue('id');
+    this.titleRoute(`Complete challenge creation for ${this.item.challengeId}`);
   }
 
   getAllConfigs(){
@@ -51,6 +53,7 @@ export class ChallengeConfigComponent extends BaseComponent implements OnInit {
     this.challengeService.attachLevelAndTrack(this.item).subscribe(res => {
       this.waiting = false;
       this.alert = Helpers.setupAlert(AlertCssClass.success, IconCssClass.success, res.data);
+      this.goToNav(`/organizer/challenge/list`);
     }, error => {
       this.waiting = false;
       this.alert = Helpers.setupAlert(AlertCssClass.error, IconCssClass.error, error);

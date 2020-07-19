@@ -12,7 +12,13 @@ export const routes = {
   CHALLENGE: {
     CREATE: `${BASEURL}/challenge/create`,
     CONFIG: `${BASEURL}/challenge/attach`,
-    LIST: `${BASEURL}/challenge/get-all`
+    LIST: `${BASEURL}/challenge/get-all`,
+    FORMDETAIL: `${BASEURL}/challenge/formdetail`,
+    DETAIL: `${BASEURL}/challenge/details`
+  },
+  TASK: {
+    CREATE: `${BASEURL}/task/create`,
+    LIST: `${BASEURL}/task/get-all`
   },
   LEVEL: {
     LIST: `${BASEURL}/level/list`

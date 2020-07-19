@@ -6,6 +6,7 @@ import { BaseComponent, routes } from '@app/shared';
 import { ChallengeService } from '@app/shared/services/challenge.service';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
+import { IChallenge, IChallengeList } from '@app/shared/common/model/IChallenge';
 
 @Component({
   selector: 'app-list-challenge',
@@ -13,11 +14,10 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./list-challenge.component.scss']
 })
 export class ListChallengeComponent extends BaseComponent implements OnInit {
-
+items: IChallengeList[];
   constructor(router: Router, titleService: Title, private challengeService: ChallengeService) {
     super(null, router, null, titleService, challengeService );
   }
-
   ngOnInit() {
     this.titleRoute('List of challenges');
     this.filter.status = '';

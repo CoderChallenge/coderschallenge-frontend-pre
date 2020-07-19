@@ -39,7 +39,7 @@ export abstract class BaseComponent implements IComponentAction, OnInit {
   filterarray: IFilter[];
   waiting: boolean;
   url: any;
-  items: [];
+  items: any;
   item: any = {};
   exitem: any;
   alert: IAlert;

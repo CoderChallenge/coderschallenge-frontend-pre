@@ -5,6 +5,8 @@ import { ChallengeComponent } from '@pages/features/organizer/challenge/challeng
 import { CreateChallengeComponent } from '@pages/features/organizer/challenge/create-challenge/create-challenge.component';
 import { ChallengeConfigComponent } from '@pages/features/organizer/challenge/challenge-config/challenge-config.component';
 import { ListChallengeComponent } from '@pages/features/organizer/challenge/list-challenge/list-challenge.component';
+import { TaskComponent } from '@pages/features/organizer/task/task.component';
+import { CreateTaskComponent } from '@pages/features/organizer/task/create-task/create-task.component';
 
 
 const routes: Routes = [
@@ -33,6 +35,16 @@ const routes: Routes = [
         path: 'list',
         component: ListChallengeComponent
       },
+    ]
+  },
+  {
+    path: 'task',
+    component: TaskComponent,
+    children: [
+      {
+        path: 'create/:id',
+        component: CreateTaskComponent
+      }
     ]
   }
 ];

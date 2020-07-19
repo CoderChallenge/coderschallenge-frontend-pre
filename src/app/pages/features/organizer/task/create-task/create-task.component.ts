@@ -1,44 +1,71 @@
-import { Component, OnInit} from '@angular/core';
-import { HttpEvent, HttpEventType } from '@angular/common/http';
-import { AlertCssClass, BaseComponent, IconCssClass, routes } from '@app/shared';
+import { Component, OnInit } from '@angular/core';
+import { IChallenge, IChallengeFormDetail } from '@app/shared/common/model/IChallenge';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FileService } from '@app/shared/services/file.service';
 import { ChallengeService } from '@app/shared/services/challenge.service';
+import { Utils } from '@app/shared/utils';
 import { Helpers } from '@app/shared/helpers';
-import { IChallenge } from '@app/shared/common/model/IChallenge';
-import { Router } from '@angular/router';
-import { Utils } from '@src/app/shared/utils';
+import { AlertCssClass, BaseComponent, IconCssClass, routes } from '@app/shared';
 import { environment } from '@src/environments/environment';
-import { IAlert } from '@app/shared/common/model/IAlert';
+import { HttpEvent, HttpEventType } from '@angular/common/http';
+import { TaskService } from '@app/shared/services/task.service';
+import { ITask } from '@app/shared/common/model/ITask';
+import { ILevel } from '@app/shared/common/model/ILevel';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-create-challenge',
-  templateUrl: './create-challenge.component.html',
-  styleUrls: ['./create-challenge.component.scss']
+  selector: 'app-create-task',
+  templateUrl: './create-task.component.html',
+  styleUrls: ['./create-task.component.scss']
 })
-export class CreateChallengeComponent extends BaseComponent implements OnInit{
+export class CreateTaskComponent extends BaseComponent implements OnInit {
   filename: any;
   fileError: boolean;
   isImage: boolean;
   formData = new FormData();
-  item: IChallenge = {
+  item: ITask = {
     title: '',
-    challengeImage: '',
+    attachment: '',
     description: '',
-    end_date: '',
-    start_date: ''
+    track: 0,
+    level: 0,
+    forDay: 0,
+    challengeId: '',
+    point: 0
   };
-  constructor(router: Router, titleService: Title,
+  challengeDetail: IChallengeFormDetail;
+  days: number[] = [];
+  constructor(router: Router, activatedRoute: ActivatedRoute, titleService: Title,
               private fileService: FileService,
-              private challengeService: ChallengeService
-  ) {
-    super(null, router, null, titleService, fileService);
+              private challengeService: ChallengeService,
+              private taskService: TaskService) {
+    super(null, router, activatedRoute, titleService, fileService);
   }
 
-  ngOnInit() {
-    this.titleRoute('Create new challenge');
+  ngOnInit(){
+    this.titleRoute('Create a new task');
+    this.item.challengeId = this.getParamValue('id');
+    this.getChallengeDetail();
+  }
+  getChallengeDetail(){
+    this.waiting = true;
+    this.challengeService.getChallengeFormDetail(this.item.challengeId).subscribe(res => {
+      this.challengeDetail = res.data;
+      this.createArrayOfDays();
+      this.waiting = false;
+   }, error => {
+     this.waiting = false;
+     this.challengeService.errorAlert(error, 'error' );
+   });
   }
 
+   createArrayOfDays(): Array<number>{
+    if (!this.challengeDetail && this.challengeDetail.timeline <= 0) { return this.days; }
+    for (let i = 1; i <= this.challengeDetail.timeline; i++){
+      this.days.push(i);
+      }
+    return this.days;
+  }
   submitForm(){
     this.alert = null;
     this.waiting = true;
@@ -46,9 +73,8 @@ export class CreateChallengeComponent extends BaseComponent implements OnInit{
     if (file && file.size > 0) {
       this.uploadImage(this.formData);
     } else {
-      this.createChallenge(this.item);
+      this.createTask(this.item);
     }
-
   }
 
   onFileChange(event) {
@@ -81,8 +107,8 @@ export class CreateChallengeComponent extends BaseComponent implements OnInit{
             case HttpEventType.Sent:
               break;
             case HttpEventType.Response:
-              this.item.challengeImage = event.body.secure_url;
-              this.createChallenge(this.item);
+              this.item.attachment = event.body.secure_url;
+              this.createTask(this.item);
               break;
           }
         }, error => {
@@ -91,11 +117,10 @@ export class CreateChallengeComponent extends BaseComponent implements OnInit{
         });
   }
 
-  private createChallenge(body: IChallenge){
-    this.challengeService.createChallenge(body).subscribe(res => {
+  private createTask(body: ITask){
+    this.taskService.createTask(body).subscribe(res => {
       this.waiting = false;
-      // Stage 2 route
-      this.goToNav(`/organizer/challenge/config/${res.data.uid}`);
+      this.goToNav('/organizer/task/list');
     }, error => {
       this.waiting = false;
       this.alert = Helpers.setupAlert(AlertCssClass.error, IconCssClass.error, error);
