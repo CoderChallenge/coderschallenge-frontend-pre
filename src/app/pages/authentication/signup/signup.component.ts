@@ -9,6 +9,7 @@ import { NgForm } from '@angular/forms';
 import { AccountService } from '@app/shared/services/account.service';
 import { AuthenticationService } from '@app/shared/services/authentication.service';
 import { environment } from '@src/environments/environment';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-signup',
@@ -34,6 +35,7 @@ export class SignupComponent implements OnInit {
               private accountService: AccountService,
               private dataService: DataStoreService,
               private router: Router,
+              private titleService: Title,
               private authenticationService: AuthenticationService,
               private activatedRoute: ActivatedRoute) {
 
@@ -43,6 +45,7 @@ export class SignupComponent implements OnInit {
     this.destoryPageTracker();
     this.githubCallbackHandler();
     this.googleCallbackHandler();
+    this.titleService.setTitle('Signup page');
   }
 
   signInWithGoogle(){
@@ -80,6 +83,7 @@ export class SignupComponent implements OnInit {
     this.item.type = 'Participant';
     this.accountService.register(this.item).subscribe(res => {
       this.loading = false;
+      f.reset();
       this.alert = Helpers.setupAlert(AlertCssClass.success, IconCssClass.success, 'Account created successfully, Please check your email to complete your registration');
     }, error => {
       this.loading = false;
