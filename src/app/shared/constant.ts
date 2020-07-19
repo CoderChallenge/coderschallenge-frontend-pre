@@ -21,10 +21,16 @@ export const routes = {
     LIST: `${BASEURL}/task/get-all`
   },
   LEVEL: {
-    LIST: `${BASEURL}/level/list`
+    LIST: `${BASEURL}/level/list`,
+    ALL: `${BASEURL}/level/get-all`,
+    CREATE: `${BASEURL}/level/create`,
+    UPDATE: `${BASEURL}/level/edit`,
   },
   TRACK: {
-    LIST: `${BASEURL}/track/list`
+    LIST: `${BASEURL}/track/list`,
+    ALL: `${BASEURL}/track/get-all`,
+    CREATE: `${BASEURL}/track/create`,
+    UPDATE: `${BASEURL}/track/edit`,
   },
   CLOUDINARY: `https://api.cloudinary.com/v1_1/eskye/image/upload`
 };
@@ -89,5 +95,11 @@ export const Pages = {
   login: 'login'
 };
 
+export enum notifications {
+  success = 'Success Notification',
+  error = 'Error Notification',
+  warn = 'Warning Notification',
+  info = 'Info Notification'
+}
 
 

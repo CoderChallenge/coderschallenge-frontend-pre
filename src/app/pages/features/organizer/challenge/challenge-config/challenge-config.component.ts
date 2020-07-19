@@ -33,8 +33,8 @@ export class ChallengeConfigComponent extends BaseComponent implements OnInit {
 
   getAllConfigs(){
     this.waiting = true;
-    this.getNameAndId(routes.TRACK.LIST).subscribe(res => this.tracks = res.data);
-    this.getNameAndId(routes.LEVEL.LIST).subscribe(res => this.levels = res.data);
+    this.getNameAndId(routes.TRACK.ALL).subscribe(res => this.tracks = res.data);
+    this.getNameAndId(routes.LEVEL.ALL).subscribe(res => this.levels = res.data);
     this.waiting = false;
   }
 
