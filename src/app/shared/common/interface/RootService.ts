@@ -49,7 +49,7 @@ export class RootService<T extends IRootObject> implements IRootService<T> {
     return this.httpClient.post<T>(`${url}`, body, { headers: reqHeader });
   }
 
-  update(item: T, url: string): Observable<T> {
+  update(item: any, url: string): Observable<T> {
     const reqHeader = new HttpHeaders(this.header);
     return this.httpClient.put<T>(`${url}`, item, { headers: reqHeader }).pipe(
       map(data => {

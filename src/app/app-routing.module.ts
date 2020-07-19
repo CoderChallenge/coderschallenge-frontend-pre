@@ -20,14 +20,28 @@ const routes: Routes = [
   {
     path: 'organizer',
     component: AdminLayoutComponent,
-    // canActivate: [AuthGuard],
-    // data: {
-    //   expectedRole: UserTypes.organizer
-    // },
+    canActivate: [AuthGuard],
+    data: {
+      expectedRole: UserTypes.organizer
+    },
     children: [
       {
         path: '',
         loadChildren: () => import('@pages/features/organizer/organizer.module').then(m => m.OrganizerModule)
+      }
+    ]
+  },
+  {
+    path: 'admin',
+    component: AdminLayoutComponent,
+    canActivate: [AuthGuard],
+    data: {
+      expectedRole: UserTypes.admin
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('@pages/features/admin/admin.module').then(m => m.AdminModule)
       }
     ]
   }

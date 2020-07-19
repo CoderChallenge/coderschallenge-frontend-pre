@@ -33,23 +33,26 @@ export class NavigationService {
       name: 'Dashboard',
       type: 'link',
       tooltip: 'Dashboard',
-      icon: 'fa fa-home',
-      state: '/organizer/dashboard'
+      icon: 'dashboard.svg',
+      stateName: 'dashboard',
+      state: '/admin/dashboard'
     },
     {
-      name: 'Challenge',
+      name: 'Track',
       type: 'link',
-      tooltip: 'Challenge',
-      icon: 'fa fa-code',
-      state: '/organizer/challenge/create'
+      tooltip: 'Track',
+      icon: 'collapse.svg',
+      stateName: 'track',
+      state: '/admin/track'
     },
     {
-      name: 'Challenge',
+      name: 'Level',
       type: 'link',
-      tooltip: 'Challenge',
-      icon: 'fa fa-code',
-      state: '/organizer/challenge/config'
-    },
+      tooltip: 'Level',
+      icon: 'widgets.svg',
+      stateName: 'level',
+      state: '/admin/level'
+    }
   ];
 
   participantMenu: IMenuItem[] = [

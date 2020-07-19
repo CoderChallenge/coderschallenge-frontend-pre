@@ -1,0 +1,137 @@
+<div class="row">
+    <!-- Start col -->
+
+    <div class="col-lg-12 col-md-12 col-12 col-sm-12">
+        <div class="card m-b-30">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col-6">
+                        <h5 class="card-title mb-0">Tracks Management</h5>
+                        <ul class="list-inline-group float-left text-right mt-3 mb-0 pl-0">
+                            <li class="list-inline-item">
+                                <div class="form-group mb-0 amount-spent-select">
+                                    <select name="count" [(ngModel)]="paginationConfig.count" (change)="init()" class="form-control" id="formControlSelect">
+                                        <option *ngFor="let size of sizes" [value]="size">{{size}}</option>
+                                    </select>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <ul class="list-inline-group text-right mb-0 pl-0">
+                            <li class="list-inline-item">
+                                <div class="button-list mt-2 ml-3">
+                                    <button type="button" (click)="open(modalTrack)" class="btn btn-primary border-0 btn-"><i class="feather icon-plus"></i> New Track </button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-borderless font-13">
+                        <thead class="thead-default">
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let item of items; let i=index">
+
+                            <td>{{i + 1}}</td>
+                            <td>{{item.name}}</td>
+                            <td>
+                                <button  (click)="open(modalTrack,item)" ngbTooltip="Edit Track " type="button" class="btn btn-sm btn-success">
+                                    <span class=" label label-success">  <i class="fa fa-edit"></i></span>
+                                </button> &nbsp;&nbsp;
+
+                                <button  (click)="remove(item, deleteConfirmModal)" ngbTooltip="Delete Track " type="button" class="btn btn-sm btn-danger">
+                                    <span class=" label label-danger">  <i class="fa fa-trash"></i></span>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <h3 *ngIf="items?.length === 0" class="lead text-danger text-center">No record to display</h3>
+                </div>
+
+            </div>
+            <div class="card-footer">
+                <div class="col-md-12">
+                    <div class="col-md-4 float-left">
+                        <p class="font-12">{{getPageInfoDescription()}}</p>
+                    </div>
+                    <div class="col-md-6 float-right">
+                        <ngb-pagination class="d-flex justify-content-end"
+                                        [collectionSize]="paginationConfig.total"
+                                        [maxSize]="3" [pageSize]="paginationConfig.count"
+                                        [boundaryLinks]="true"
+                                        [directionLinks]="true"
+                                        (pageChange)="pageChanged($event)"
+                                        [(page)]="paginationConfig.page"
+                                        aria-label="Default pagination"
+                                        size="sm"></ngb-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End col -->
+</div>
+<app-loader [isLoadingData]="waiting"></app-loader>
+
+<ng-template #modalTrack let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{!edit ? 'Create New Track': 'Update Track'}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #f="ngForm" (ngSubmit)="!edit ? createTrack(f) : updateTrack(f)">
+            <div class="form-group mb-2"  [ngClass]="{
+                    'has-danger': name.invalid && (name.dirty || name.touched),
+                    'has-success': name.valid && (name.dirty || name.touched)
+                }">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Track Name" [(ngModel)]="item.name"
+                       required #name="ngModel">
+                <small class="form-text text-danger" *ngIf="name.errors?.required && (name.dirty || name.touched)">This field is required</small>
+
+            </div>
+
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <btn-loading
+                [btnClass]="'btn btn-rounded btn-outline-dark'"
+                [loading]="waiting"
+                [type]="'button'"
+                [disabled]="waiting"
+                [loadingText]="'Loading...'"
+                (click)="!edit ? createTrack(f) : updateTrack(f)">
+            <i class="i-Add-User"></i> Save
+        </btn-loading>
+    </div>
+</ng-template>
+
+<ng-template #deleteConfirmModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-title">Delete Track</h4>
+        <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p><strong>Are you sure?</strong></p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary btn-rounded" (click)="modal.dismiss('cancel')">Cancel</button>
+        <button type="button" ngbAutofocus class="btn btn-wide btn-danger btn-rounded" (click)="modal.close('Ok')">Ok</button>
+    </div>
+</ng-template>
