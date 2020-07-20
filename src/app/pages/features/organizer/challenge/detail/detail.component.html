@@ -1,0 +1,76 @@
+<div class="row">
+    <!-- Start col -->
+    <div class="col-md-12 col-lg-12 col-xl-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-xl-5">
+                        <div class="card">
+                            <img class="img-fluid col-md-10 col-sm-12" src="{{item.image_url ? item.image_url : 'assets/images/svg-icon/no-image.svg'}}" alt="{{item.title}}">
+                            <div class="card-body">
+                                <h5 class="card-title font-18">{{item.title}}</h5>
+                                <div class="button-list mt-5">
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{encodedText(item.link)}}&t={{item.title}}&display=popup" target="_blank" rel="noopener noreferrer" class="btn btn-primary-rgba font-18"><i class="feather icon-facebook"></i></a>
+                                    <a href="https://twitter.com/intent/tweet?text={{item.title}}&url={{encodedText(item.link)}}&hashtags={{item.timeline}}DaysChallenge,codeChallengers,community" target="_blank" rel="noopener noreferrer" class="btn btn-info-rgba font-18"><i class="feather icon-twitter"></i></a>
+                                    <a href="https://wa.me/?text={{encodedText('Hi,' +'I will be participating in the *#'+item.timeline+item.title?.replace(' ', '')+'Challenge*.  I\'m inviting you to register by clicking the link '+ item.link)}}" data-action="share/whatsapp/share"  target="_blank" rel="noopener noreferrer" class="btn btn-success-rgba font-18"><i class="feather socicon-whatsapp"></i></a>
+                                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{encodedText(item.link)}}&title={{encodedText(item.link)}}&summary={{encodedText(item.description?.substring(0,300))}}&source={{appUrl}}" target="_blank" rel="noopener noreferrer" class="btn btn-info font-18"><i class="feather icon-linkedin"></i></a>
+                                </div>
+                                <p class="card-text"><small class="text-muted">Created on {{item.created_at | date:'short'}}</small></p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-xl-7">
+
+
+                        <div class="input-group mb-3 mt-3">
+                            <input type="text" #copyInput class="form-control bg-light text-black rounded border-0" readonly [value]="item.link" aria-describedby="button-addon-group"/>
+                            <div class="input-group-append">
+                                <button class="btn btn-light" (click)="copyText(copyInput)" type="button" id="button-addon-group"><i class="feather icon-copy"></i> </button>
+                            </div>
+                        </div>
+                        <p>
+                            <span class="font-14 font-weight-bold text-black"><i class="feather icon-calendar"></i> Duration</span>
+                        </p>
+                        <dl class="row text-black">
+                            <dt class="col-sm-3 font-12 f-w-7 my-2">Start Date</dt>
+                            <dt class="col-sm-9 font-12 f-w-7 my-2"> {{item.start_date | date:'medium'}}</dt>
+                            <dt class="col-sm-3 font-12 f-w-7 my-2">End Date</dt>
+                            <dt class="col-sm-9 font-12 f-w-7 my-2"> {{item.end_date | date:'medium'}}</dt>
+                            <dt class="col-sm-4 font-12 f-w-7 my-2">Number Of Days </dt>
+                            <dt class="col-sm-8 font-12 f-w-7 my-2"> {{item.timeline }}</dt>
+                        </dl>
+
+                        <p>
+                            <span class="font-14 font-weight-bold text-black"><i class="feather icon-users"></i> Registered Participants</span>
+                        </p>
+                        <p class="text-black">
+                            <span>Male</span><span class="ml-2 font-weight-bold">{{item.participants?.Male}}</span>
+                            <span class="ml-3">Female</span><span class="ml-2 font-weight-bold">{{item.participants?.Female}}</span>
+                        </p>
+                        <p class="mt-5">
+                            <span class="font-14 font-weight-bold text-black"><i class="dripicons-graph-bar"></i> Tracks</span>
+                        </p>
+                        <p class="text-black">
+                            <span *ngFor="let track of item.tracks" class="ml-2 font-13 font-weight-bold">{{track.name}},</span>
+                        </p>
+                        <p class="mt-5 mb-5">
+                            <span class="font-14 font-weight-bold text-black"><i class="dripicons-checklist"></i> Level</span>
+                        </p>
+                        <p class="text-black">
+                            <span *ngFor="let level of item.levels" class="ml-2 font-13 font-weight-bold">{{level.name}},</span>
+                        </p>
+
+                        <p class="mt-5">
+                            <span class="font-14 font-weight-bold text-black"><i class="feather icon-book-open"></i> Description</span>
+                        </p>
+                        <p class="mb-4 text-truncate">{{item.description}}</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End col -->
+</div>
+<app-loader [isLoadingData]="waiting"></app-loader>

@@ -56,7 +56,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-borderless font-13">
+                    <table class="table table-borderless font-13 table-hovered">
                         <thead class="thead-default">
                         <tr>
                             <th>Title</th>
@@ -69,7 +69,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr *ngFor="let item of items; let i=index">
+                        <tr *ngFor="let item of items; let i=index" routerLink="/organizer/challenge/detail/{{item.uid}}">
 
                             <td class="font-13">{{item.title}}</td>
                             <td>{{item.participants_count}}</td>
