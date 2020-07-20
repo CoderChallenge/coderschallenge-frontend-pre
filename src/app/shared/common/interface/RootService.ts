@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/internal/Observable';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Injector } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
@@ -9,6 +9,7 @@ import { IQueryOptions } from '@app-shared/common/interface/IQueryOptions';
 import { IRootObject } from '@app-shared/common/interface/IRootObject';
 import { IRootService } from '@app-shared/common/interface/IRootService';
 import { QueryBuilder } from '@app-shared/common/interface/QueryBuilder';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 export class RootService<T extends IRootObject> implements IRootService<T> {
@@ -96,8 +97,24 @@ export class RootService<T extends IRootObject> implements IRootService<T> {
   }
 
   private get alert(): ToastrService {
-    const res = this.inject.get<ToastrService>(ToastrService);
-    return res;
+    return this.inject.get<ToastrService>(ToastrService);
+  }
+
+  private get snackBar(): MatSnackBar {
+    return this.inject.get<MatSnackBar>(MatSnackBar);
+  }
+
+  showSuccess(message: string): void {
+    this.snackBar.open(message, 'X', {panelClass: ['success']});
+  }
+  showError(message: string): void {
+    // The second parameter is the text in the button.
+    // In the third, we send in the css class for the snack bar.
+    this.snackBar.open(message, 'X', {panelClass: ['error']});
+  }
+
+  showWarning(message: string){
+    this.snackBar.open(message, 'X', {panelClass: ['warning']});
   }
 
   successAlert(msg: any, title?: any) {

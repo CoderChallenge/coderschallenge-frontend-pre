@@ -18,7 +18,7 @@ export const routes = {
   },
   TASK: {
     CREATE: `${BASEURL}/task/create`,
-    LIST: `${BASEURL}/task/get-all`
+    LIST: `${BASEURL}/task/list`
   },
   LEVEL: {
     LIST: `${BASEURL}/level/list`,

@@ -36,7 +36,7 @@ items: IChallengeList[];
       this.items = res.data.data;
     }, (error: HttpErrorResponse) => {
       this.waiting = false;
-      this.challengeService.errorAlert(error.statusText, 'error' );
+      this.challengeService.showError(error.statusText);
     });
   }
 

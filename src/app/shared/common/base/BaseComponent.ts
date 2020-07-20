@@ -236,7 +236,7 @@ export abstract class BaseComponent implements IComponentAction, OnInit {
     if (this.filter) {
       for (const key of Object.keys(this.filter)) {
         const value = this.filter[key];
-        query += `${key}=${value}`;
+        if (value){ query += `&${key}=${value}`; }
       }
     }
     return query;

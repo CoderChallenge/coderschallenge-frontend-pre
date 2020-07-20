@@ -35,6 +35,7 @@ export class CreateTaskComponent extends BaseComponent implements OnInit {
   };
   challengeDetail: IChallengeFormDetail;
   days: number[] = [];
+    fileErrorMessage: string;
   constructor(router: Router, activatedRoute: ActivatedRoute, titleService: Title,
               private fileService: FileService,
               private challengeService: ChallengeService,
@@ -55,7 +56,7 @@ export class CreateTaskComponent extends BaseComponent implements OnInit {
       this.waiting = false;
    }, error => {
      this.waiting = false;
-     this.challengeService.errorAlert(error, 'error' );
+     this.challengeService.showError(error);
    });
   }
 
@@ -83,12 +84,12 @@ export class CreateTaskComponent extends BaseComponent implements OnInit {
     this.filename = file.name;
     if (!Utils.isValidFileSize(file)){
       this.fileError = true;
-      this.alert = Helpers.setupAlert(AlertCssClass.warning, IconCssClass.warning, 'File size is too large');
+     this.fileErrorMessage = 'File size is too large';
       return false;
     }
     if (!Utils.fileValidator(file, true)) {
       this.fileError = true;
-      this.alert = Helpers.setupAlert(AlertCssClass.warning, IconCssClass.warning, 'File format not valid, only file with png,jpg is allowed');
+     this.fileErrorMessage = 'File format not valid, only file with png,jpg is allowed';
       return false;
     }
     this.isImage = true;
@@ -112,7 +113,7 @@ export class CreateTaskComponent extends BaseComponent implements OnInit {
               break;
           }
         }, error => {
-          this.alert = Helpers.setupAlert(AlertCssClass.error, IconCssClass.error, error);
+          this.challengeService.showError(error);
           return false;
         });
   }
@@ -120,10 +121,10 @@ export class CreateTaskComponent extends BaseComponent implements OnInit {
   private createTask(body: ITask){
     this.taskService.createTask(body).subscribe(res => {
       this.waiting = false;
-      this.goToNav('/organizer/task/list');
+      this.go('/organizer/task/list', this.item.challengeId);
     }, error => {
       this.waiting = false;
-      this.alert = Helpers.setupAlert(AlertCssClass.error, IconCssClass.error, error);
+      this.challengeService.showError(error);
     });
   }
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ITrack } from '@app/shared/common/model/ITrack';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { TrackService } from '@app/shared/services/track.service';
 import { BaseComponent, notifications, routes } from '@app/shared';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
@@ -36,7 +35,7 @@ export class LevelComponent extends BaseComponent implements OnInit {
       this.items = res.data.data;
     }, (error: HttpErrorResponse) => {
       this.waiting = false;
-      this.levelService.errorAlert(error.statusText, 'error' );
+      this.levelService.showError(error.statusText);
     });
   }
 
@@ -62,13 +61,13 @@ export class LevelComponent extends BaseComponent implements OnInit {
   createLevel(f: NgForm) {
     this.waiting = true;
     this.levelService.createLevel(this.item).subscribe(res => {
-      this.levelService.successAlert('Created successfully', notifications.success);
+      this.levelService.showSuccess('Created successfully');
       this.modalRef.close();
       f.reset();
       this.waiting = false;
       this.reloadComponent();
     }, error => {
-      this.levelService.errorAlert(error, notifications.error);
+      this.levelService.showError(error);
       this.waiting = false;
     });
   }
@@ -78,9 +77,9 @@ export class LevelComponent extends BaseComponent implements OnInit {
     this.levelService.EditLevel(this.item).subscribe((res) => {
       this.waiting = false;
       this.modalRef.close();
-      this.levelService.successAlert(res.data, notifications.success);
+      this.levelService.showSuccess(res.data);
     }, error => {
-      this.levelService.errorAlert(error, notifications.error);
+      this.levelService.showError(error);
       this.waiting = false;
     });
   }

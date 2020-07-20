@@ -28,6 +28,7 @@ export class CreateChallengeComponent extends BaseComponent implements OnInit{
     end_date: '',
     start_date: ''
   };
+   fileErrorMessage: string;
   constructor(router: Router, titleService: Title,
               private fileService: FileService,
               private challengeService: ChallengeService
@@ -53,16 +54,17 @@ export class CreateChallengeComponent extends BaseComponent implements OnInit{
 
   onFileChange(event) {
     this.alert = null;
+    this.fileErrorMessage = '';
     const file = event.target.files[0];
     this.filename = file.name;
     if (!Utils.isValidFileSize(file)){
       this.fileError = true;
-      this.alert = Helpers.setupAlert(AlertCssClass.warning, IconCssClass.warning, 'File size is too large');
+      this.fileErrorMessage = 'File size is too large';
       return false;
     }
     if (!Utils.fileValidator(file, true)) {
       this.fileError = true;
-      this.alert = Helpers.setupAlert(AlertCssClass.warning, IconCssClass.warning, 'File format not valid, only file with png,jpg is allowed');
+      this.fileErrorMessage = 'File format not valid, only file with png,jpg is allowed';
       return false;
     }
     this.isImage = true;
@@ -86,7 +88,7 @@ export class CreateChallengeComponent extends BaseComponent implements OnInit{
               break;
           }
         }, error => {
-          this.alert = Helpers.setupAlert(AlertCssClass.error, IconCssClass.error, error);
+          this.challengeService.showError(error);
           return false;
         });
   }
@@ -98,7 +100,7 @@ export class CreateChallengeComponent extends BaseComponent implements OnInit{
       this.goToNav(`/organizer/challenge/config/${res.data.uid}`);
     }, error => {
       this.waiting = false;
-      this.alert = Helpers.setupAlert(AlertCssClass.error, IconCssClass.error, error);
+      this.challengeService.showError(error);
     });
   }
 }
