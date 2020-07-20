@@ -12,6 +12,7 @@ import { SharedComponentsModule } from '@app/shared/components/shared-components
 import { ListChallengeComponent } from './challenge/list-challenge/list-challenge.component';
 import { CreateTaskComponent } from './task/create-task/create-task.component';
 import { TaskComponent } from './task/task.component';
+import { ListTaskComponent } from './task/list-task/list-task.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { TaskComponent } from './task/task.component';
       ChallengeConfigComponent,
       ListChallengeComponent,
       CreateTaskComponent,
-      TaskComponent
+      TaskComponent,
+      ListTaskComponent
   ],
   imports: [
     CommonModule,

@@ -7,6 +7,7 @@ import { ChallengeConfigComponent } from '@pages/features/organizer/challenge/ch
 import { ListChallengeComponent } from '@pages/features/organizer/challenge/list-challenge/list-challenge.component';
 import { TaskComponent } from '@pages/features/organizer/task/task.component';
 import { CreateTaskComponent } from '@pages/features/organizer/task/create-task/create-task.component';
+import { ListTaskComponent } from '@pages/features/organizer/task/list-task/list-task.component';
 
 
 const routes: Routes = [
@@ -44,6 +45,10 @@ const routes: Routes = [
       {
         path: 'create/:id',
         component: CreateTaskComponent
+      },
+      {
+        path: 'list/:id',
+        component: ListTaskComponent
       }
     ]
   }

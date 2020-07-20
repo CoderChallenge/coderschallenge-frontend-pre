@@ -52,11 +52,11 @@ export class ChallengeConfigComponent extends BaseComponent implements OnInit {
     this.waiting = true;
     this.challengeService.attachLevelAndTrack(this.item).subscribe(res => {
       this.waiting = false;
-      this.alert = Helpers.setupAlert(AlertCssClass.success, IconCssClass.success, res.data);
+      this.challengeService.showSuccess(res.data);
       this.goToNav(`/organizer/challenge/list`);
     }, error => {
       this.waiting = false;
-      this.alert = Helpers.setupAlert(AlertCssClass.error, IconCssClass.error, error);
+      this.challengeService.showError(error);
     });
   }
 

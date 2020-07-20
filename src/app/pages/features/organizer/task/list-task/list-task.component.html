@@ -31,7 +31,7 @@
             <div class="card-header">
                 <div class="row align-items-center">
                     <div class="col-6">
-                        <h5 class="card-title mb-0">List Of Challenges</h5>
+                        <h5 class="card-title mb-0">List Of Task</h5>
                         <ul class="list-inline-group float-left text-right mt-3 mb-0 pl-0">
                             <li class="list-inline-item">
                                 <div class="form-group mb-0 amount-spent-select">
@@ -47,7 +47,7 @@
                         <ul class="list-inline-group text-right mb-0 pl-0">
                             <li class="list-inline-item">
                                 <div class="button-list mt-2 ml-3">
-                                    <button type="button" routerLink="/organizer/challenge/create" class="btn btn-primary border-0 btn-"><i class="feather icon-plus"></i> New Challenge </button>
+                                    <button type="button" routerLink="/organizer/task/create/{{challengeId}}" class="btn btn-primary border-0 btn-"><i class="feather icon-plus"></i> New Task </button>
                                 </div>
                             </li>
                         </ul>
@@ -60,26 +60,28 @@
                         <thead class="thead-default">
                         <tr>
                             <th>Title</th>
-                            <th>Participants</th>
-                            <th>Duration</th>
-                            <th>Status</th>
+                            <th>Point</th>
+                            <th>Day</th>
+                            <th>Level</th>
+                            <th>Track</th>
+                            <th>Submissions</th>
                             <th>Date Created</th>
-                            <th>Tasks</th>
-                            <th>Actions</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr *ngFor="let item of items; let i=index">
 
                             <td class="font-13">{{item.title}}</td>
-                            <td>{{item.participants_count}}</td>
+                            <td>{{item.point}}</td>
                             <td>
-                                <h6 class="font-13">{{item.timeline}} Day(s)</h6>
-                                <p class="font-10 text-success">{{item.start_date | date:'dd-MM-y'}} - {{item.end_date | date:'dd-MM-y'}}</p>
+                                <h6 class="font-13">{{item.forDay}} Day</h6>
                             </td>
-                            <td><span class="badge "  [ngClass]="{'badge-success-inverse':item.status == 'Active','badge-danger-inverse': item.status != 'Active'}">{{item.status}}</span></td>
+                            <td>{{item.levelName}}</td>
+                            <td>{{item.trackName}}</td>
+                             <td>{{item.submissions_count}}</td>
                             <td>{{item.created_at | date:'dd-MM-y'}}</td>
-                            <td>{{item.tasks_count}}</td>
+
                             <td>
                                 <div class="button-list">
                                     <div class="btn-group mr-1">
@@ -87,7 +89,7 @@
                                             <button class="btn btn-round btn-primary-rgba" type="button" id="CustomdropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-more-vertical-"></i></button>
                                             <div class="dropdown-menu" aria-labelledby="CustomdropdownMenuButton3" style="">
                                                 <a class="dropdown-item" href="#"><i class="feather icon-edit-1 mr-2"></i>Edit</a>
-                                                <a class="dropdown-item" routerLink="/organizer/task/list/{{item.uid}}"><i class="feather icon-eye-off mr-2"></i>View Tasks</a>
+                                                <a class="dropdown-item" routerLink="/organizer/task/create/{{item.uid}}"><i class="feather icon-eye-off mr-2"></i>View Tasks</a>
                                                 <a class="dropdown-item" href="#"><i class="feather icon-users mr-2"></i>Participants</a>
                                                 <a class="dropdown-item" href="#"><i class="feather icon-trash-2 mr-2"></i>Delete</a>
                                             </div>

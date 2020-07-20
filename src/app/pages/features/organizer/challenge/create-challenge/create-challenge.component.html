@@ -6,13 +6,7 @@
         </div>
         <div class="card-body">
             <form class="create-challenge-form" #f="ngForm" (ngSubmit)="submitForm()">
-                <app-alert-component
-                        *ngIf="alert || fileError"
-                        [message]="alert.response"
-                        [cssClass]="alert.cssClass"
-                        [iconClass]="alert.iconClass"
-                >
-                </app-alert-component>
+
                 <div class="form-group">
                     <!-- Title -->
                     <label for="title">Title</label>
@@ -73,7 +67,9 @@
                                required
                                class="form-control create-challenge-form__input create-challenge-form__file"
                                (change)="onFileChange($event)" #uploader
-                               name="challenge-photo" id="challenge-photo">
+                               name="challenge-photo" id="challenge-photo"/>
+                        <small *ngIf="fileErrorMessage"
+                               class="form-text text-danger"><i class=""></i>{{fileErrorMessage}}</small>
                     </div>
                 </div>
 

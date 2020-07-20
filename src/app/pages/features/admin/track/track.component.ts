@@ -35,7 +35,7 @@ export class TrackComponent extends BaseComponent implements OnInit {
       this.items = res.data.data;
     }, (error: HttpErrorResponse) => {
       this.waiting = false;
-      this.trackService.errorAlert(error.statusText, 'error' );
+      this.trackService.showError(error.statusText);
     });
   }
 
@@ -61,13 +61,13 @@ export class TrackComponent extends BaseComponent implements OnInit {
   createTrack(f: NgForm) {
       this.waiting = true;
       this.trackService.createTrack(this.item).subscribe(res => {
-        this.trackService.successAlert('Created successfully', notifications.success);
+        this.trackService.showSuccess('Created successfully');
         this.modalRef.close();
         f.reset();
         this.waiting = false;
         this.reloadComponent();
       }, error => {
-        this.trackService.errorAlert(error, notifications.error);
+        this.trackService.showError(error);
         this.waiting = false;
       });
   }
@@ -77,9 +77,9 @@ export class TrackComponent extends BaseComponent implements OnInit {
       this.trackService.EditTrack(this.item).subscribe((res) => {
         this.waiting = false;
         this.modalRef.close();
-        this.trackService.successAlert(res.data, notifications.success);
+        this.trackService.showSuccess(res.data);
       }, error => {
-        this.trackService.errorAlert(error, notifications.error);
+        this.trackService.showError(error);
         this.waiting = false;
       });
   }
