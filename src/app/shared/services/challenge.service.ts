@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { IRootService, IUser, RootService, routes } from '@app/shared';
 import { ApiResponse } from '@app/shared/common/interface/IRootObject';
 import { Observable } from 'rxjs/internal/Observable';
-import { IChallenge, IChallengeConfig, IChallengeFormDetail, IChallengeList } from '@app/shared/common/model/IChallenge';
+import { IChallenge, IChallengeConfig, IChallengeDetail, IChallengeFormDetail, IChallengeList } from '@app/shared/common/model/IChallenge';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { ErrorHandler } from '@app/shared/common/Error/ErrorHandler';
@@ -11,6 +11,7 @@ export interface IChallengeService extends IRootService<ApiResponse<IChallenge>>
   createChallenge(body: IChallenge): Observable<ApiResponse<IChallenge>>;
   attachLevelAndTrack(body: IChallengeConfig): Observable<ApiResponse<string>>;
   getChallengeFormDetail(challengeId: string): Observable<ApiResponse<IChallengeFormDetail>>;
+  getChallengeDetail(challengeId: string): Observable<ApiResponse<IChallengeDetail>>;
 }
 
 @Injectable({
@@ -34,6 +35,10 @@ export class ChallengeService extends RootService<ApiResponse<any>> implements I
   getChallengeFormDetail(challengeId: string): Observable<ApiResponse<IChallengeFormDetail>> {
      return this.get(challengeId, routes.CHALLENGE.FORMDETAIL)
          .pipe(map(res => res as ApiResponse<IChallengeFormDetail>), catchError(ErrorHandler.ErrorServerConnection));
+  }
+  getChallengeDetail(challengeId: string): Observable<ApiResponse<IChallengeDetail>> {
+    return this.get(challengeId, routes.CHALLENGE.DETAIL)
+        .pipe(map(res => res as ApiResponse<IChallengeDetail>), catchError(ErrorHandler.ErrorServerConnection));
   }
 
 }

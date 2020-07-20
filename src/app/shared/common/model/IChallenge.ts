@@ -32,3 +32,16 @@ export interface IChallengeFormDetail extends IChallenge{
   timeline: number;
 }
 
+export interface IChallengeDetail extends IChallengeFormDetail{
+  image_url: string;
+  participants: IParticipants;
+  link: string;
+  tasks_count: number;
+  created_at: string | Date;
+}
+
+export interface IParticipants {
+  Male: number;
+  Female: number;
+}
+
