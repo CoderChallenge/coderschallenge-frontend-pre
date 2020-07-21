@@ -56,7 +56,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-borderless font-13 table-hovered">
+                    <table class="table table-borderless font-13">
                         <thead class="thead-default">
                         <tr>
                             <th>Title</th>
@@ -69,7 +69,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr *ngFor="let item of items; let i=index" routerLink="/organizer/challenge/detail/{{item.uid}}">
+                        <tr *ngFor="let item of items; let i=index" >
 
                             <td class="font-13">{{item.title}}</td>
                             <td>{{item.participants_count}}</td>
@@ -86,6 +86,7 @@
                                         <div class="dropdown">
                                             <button class="btn btn-round btn-primary-rgba" type="button" id="CustomdropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-more-vertical-"></i></button>
                                             <div class="dropdown-menu" aria-labelledby="CustomdropdownMenuButton3" style="">
+                                                <a class="dropdown-item"routerLink="/organizer/challenge/detail/{{item.uid}}"><i class="feather icon-eye -1 mr-2"></i>Detail</a>
                                                 <a class="dropdown-item" href="#"><i class="feather icon-edit-1 mr-2"></i>Edit</a>
                                                 <a class="dropdown-item" routerLink="/organizer/task/list/{{item.uid}}"><i class="feather icon-eye-off mr-2"></i>View Tasks</a>
                                                 <a class="dropdown-item" href="#"><i class="feather icon-users mr-2"></i>Participants</a>
