@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '@app/shared';
 import { ChallengeService } from '@app/shared/services/challenge.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import { IChallengeDetail } from '@app/shared/common/model/IChallenge';
 
 @Component({
@@ -13,7 +13,9 @@ import { IChallengeDetail } from '@app/shared/common/model/IChallenge';
 export class DetailComponent extends BaseComponent implements OnInit {
 item: IChallengeDetail;
 challengeId: string;
-  constructor(router: Router, activatedRoute: ActivatedRoute, titleService: Title, private challengeService: ChallengeService) {
+copiedStatus: boolean;
+  constructor(router: Router, activatedRoute: ActivatedRoute, titleService: Title,
+              private challengeService: ChallengeService, private meta: Meta) {
     super(null, router, activatedRoute , titleService, challengeService );
   }
 
@@ -26,6 +28,12 @@ challengeId: string;
     this.waiting = true;
     this.challengeService.getChallengeDetail(this.challengeId).subscribe(res => {
       this.item = res.data;
+      this.meta.addTags([
+          {name: 'og:title', content: this.item.title},
+          {name: 'og:description', content: this.item.description},
+          {name: 'og:image', content: this.item.image_url},
+          {name: 'og:url', content: window.location.href}
+     ]);
       this.waiting = false;
     }, error => {
       this.waiting = false;
@@ -34,10 +42,11 @@ challengeId: string;
   }
 
   copyText(inputElement: HTMLInputElement){
-    /* Select the text field */
+    this.copiedStatus = false;
     inputElement.select();
     document.execCommand('copy');
     inputElement.setSelectionRange(0, 0);
+    this.copiedStatus = true;
   }
 
    encodedText(text: string): string{

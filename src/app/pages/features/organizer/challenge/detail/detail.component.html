@@ -21,12 +21,10 @@
 
                     </div>
                     <div class="col-lg-6 col-md-12 col-xl-7">
-
-
                         <div class="input-group mb-3 mt-3">
                             <input type="text" #copyInput class="form-control bg-light text-black rounded border-0" readonly [value]="item.link" aria-describedby="button-addon-group"/>
                             <div class="input-group-append">
-                                <button class="btn btn-light" (click)="copyText(copyInput)" type="button" id="button-addon-group"><i class="feather icon-copy"></i> </button>
+                                <button class="btn btn-light" placement="bottom" [closeDelay]="2000" triggers="click:blur" ngbTooltip="{{copiedStatus ? 'Copied!': ''}}"  (click)="copyText(copyInput)" type="button" id="button-addon-group"><i class="feather icon-copy"></i> </button>
                             </div>
                         </div>
                         <p>
