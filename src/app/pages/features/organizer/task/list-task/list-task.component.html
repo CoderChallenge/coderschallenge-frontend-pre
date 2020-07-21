@@ -7,21 +7,28 @@
                 <div class="col-md-12 col-12 col-sm-12">
                     <form class="form-inline">
                         <div class="form-group col-md-3 col-sm-12">
-                            <input type="date" name="dateFrom" [(ngModel)]="filter.dateFrom" class="form-control w-100" placeholder="From"/>
+                            <input [(ngModel)]="filter.dateFrom" class="form-control w-100" name="dateFrom" placeholder="From"
+                                   type="date"/>
                         </div>
                         <div class="form-group col-md-3 col-sm-12">
-                            <input type="date" name="dateTo" class="form-control w-100" [(ngModel)]="filter.dateTo" placeholder="To"/>
+                            <input [(ngModel)]="filter.dateTo" class="form-control w-100" name="dateTo" placeholder="To"
+                                   type="date"/>
                         </div>
                         <div class="form-group col-md-3">
-                            <select class="form-control w-100" (change)="init()" name="status" [(ngModel)]="filter.status">
-                                <option value="" selected aria-selected="true" disabled>Status</option>
+                            <select (change)="init()" [(ngModel)]="filter.status" class="form-control w-100"
+                                    name="status">
+                                <option aria-selected="true" disabled selected value="">Status</option>
                                 <option value="active">Active</option>
                                 <option value="inactive">Inactive</option>
                             </select>
                         </div>
                         <div class="button-list mt-2 ml-3">
-                            <button type="button" (click)="init()" class="btn btn-primary border-0  font-12"><i class="feather icon-filter"></i> Filter</button>
-                            <button type="button" (click)="reloadComponent()" class="btn btn-primary border-0 font-12"><i class="feather  icon-refresh-ccw"></i> Reload</button>
+                            <button (click)="init()" class="btn btn-primary border-0  font-12" type="button"><i
+                                    class="feather icon-filter"></i> Filter
+                            </button>
+                            <button (click)="reloadComponent()" class="btn btn-primary border-0 font-12" type="button">
+                                <i class="feather  icon-refresh-ccw"></i> Reload
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -35,7 +42,8 @@
                         <ul class="list-inline-group float-left text-right mt-3 mb-0 pl-0">
                             <li class="list-inline-item">
                                 <div class="form-group mb-0 amount-spent-select">
-                                    <select name="count" [(ngModel)]="paginationConfig.count" (change)="init()" class="form-control" id="formControlSelect">
+                                    <select (change)="init()" [(ngModel)]="paginationConfig.count" class="form-control"
+                                            id="formControlSelect" name="count">
                                         <option *ngFor="let size of sizes" [value]="size">{{size}}</option>
                                     </select>
 
@@ -47,7 +55,10 @@
                         <ul class="list-inline-group text-right mb-0 pl-0">
                             <li class="list-inline-item">
                                 <div class="button-list mt-2 ml-3">
-                                    <button type="button" routerLink="/organizer/task/create/{{challengeId}}" class="btn btn-primary border-0 btn-"><i class="feather icon-plus"></i> New Task </button>
+                                    <button class="btn btn-primary border-0 btn-" routerLink="/organizer/task/create/{{challengeId}}"
+                                            type="button"><i class="feather icon-plus"></i> New
+                                        Task
+                                    </button>
                                 </div>
                             </li>
                         </ul>
@@ -79,19 +90,28 @@
                             </td>
                             <td>{{item.levelName}}</td>
                             <td>{{item.trackName}}</td>
-                             <td>{{item.submissions_count}}</td>
+                            <td>{{item.submissions_count}}</td>
                             <td>{{item.created_at | date:'dd-MM-y'}}</td>
 
                             <td>
                                 <div class="button-list">
                                     <div class="btn-group mr-1">
                                         <div class="dropdown">
-                                            <button class="btn btn-round btn-primary-rgba" type="button" id="CustomdropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-more-vertical-"></i></button>
-                                            <div class="dropdown-menu" aria-labelledby="CustomdropdownMenuButton3" style="">
-                                                <a class="dropdown-item" href="#"><i class="feather icon-edit-1 mr-2"></i>Edit</a>
-                                                <a class="dropdown-item" routerLink="/organizer/task/create/{{item.uid}}"><i class="feather icon-eye-off mr-2"></i>View Tasks</a>
-                                                <a class="dropdown-item" href="#"><i class="feather icon-users mr-2"></i>Participants</a>
-                                                <a class="dropdown-item" href="#"><i class="feather icon-trash-2 mr-2"></i>Delete</a>
+                                            <button aria-expanded="false" aria-haspopup="true"
+                                                    class="btn btn-round btn-primary-rgba" data-toggle="dropdown"
+                                                    id="CustomdropdownMenuButton3" type="button"><i
+                                                    class="feather icon-more-vertical-"></i></button>
+                                            <div aria-labelledby="CustomdropdownMenuButton3" class="dropdown-menu"
+                                                 style="">
+                                                <a class="dropdown-item" href="#"><i
+                                                        class="feather icon-edit-1 mr-2"></i>Edit</a>
+                                                <a class="dropdown-item"
+                                                   routerLink="/organizer/task/create/{{item.uid}}"><i
+                                                        class="feather icon-eye-off mr-2"></i>View Tasks</a>
+                                                <a class="dropdown-item" href="#"><i
+                                                        class="feather icon-users mr-2"></i>Participants</a>
+                                                <a class="dropdown-item" href="#"><i
+                                                        class="feather icon-trash-2 mr-2"></i>Delete</a>
                                             </div>
                                         </div>
                                     </div>
@@ -111,14 +131,14 @@
                         <p class="font-12">{{getPageInfoDescription()}}</p>
                     </div>
                     <div class="col-md-6 float-right">
-                        <ngb-pagination class="d-flex justify-content-end"
-                                        [collectionSize]="paginationConfig.total"
-                                        [maxSize]="3" [pageSize]="paginationConfig.count"
-                                        [boundaryLinks]="true"
-                                        [directionLinks]="true"
-                                        (pageChange)="pageChanged($event)"
+                        <ngb-pagination (pageChange)="pageChanged($event)"
                                         [(page)]="paginationConfig.page"
+                                        [boundaryLinks]="true" [collectionSize]="paginationConfig.total"
+                                        [directionLinks]="true"
+                                        [maxSize]="3"
+                                        [pageSize]="paginationConfig.count"
                                         aria-label="Default pagination"
+                                        class="d-flex justify-content-end"
                                         size="sm"></ngb-pagination>
                     </div>
                 </div>
