@@ -7,7 +7,7 @@ import { ChallengeService } from '@app/shared/services/challenge.service';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IChallenge, IChallengeList } from '@app/shared/common/model/IChallenge';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-list-challenge',
@@ -16,9 +16,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ListChallengeComponent extends BaseComponent implements OnInit {
 items: IChallengeList[];
-  constructor(router: Router, titleService: Title, private challengeService: ChallengeService, private modalService: NgbModal) {
+  private modalRef: NgbModalRef;
+  constructor(router: Router, titleService: Title, private challengeService: ChallengeService,
+              private modalService: NgbModal) {
     super(null, router, null, titleService, challengeService );
   }
+
   ngOnInit() {
     this.titleRoute('List of challenges');
     this.filter.status = '';
@@ -41,11 +44,24 @@ items: IChallengeList[];
     });
   }
 
-  remove(item, modal) {
+  remove(item: IChallengeList, modal: any) {
     this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true })
         .result.then((result) => {
-    }, (reason) => {
+          this.deleteChallenge(item);
+     }, (reason) => {
     });
   }
 
+  protected deleteChallenge(item: IChallengeList){
+    this.waiting = true;
+    this.challengeService.deleteChallenge(item.uid).subscribe(res => {
+      this.waiting = false;
+      this.init();
+      this.challengeService.showSuccess(res.data);
+      this.modalRef.close();
+    }, error => {
+      this.waiting = false;
+      this.challengeService.showError(error);
+    });
+  }
 }

@@ -15,7 +15,8 @@ export const routes = {
     LIST: `${BASEURL}/challenge/get-all`,
     FORMDETAIL: `${BASEURL}/challenge/formdetail`,
     DETAIL: `${BASEURL}/challenge/details`,
-    EDIT: `${BASEURL}/challenge/edit`
+    EDIT: `${BASEURL}/challenge/edit`,
+    DELETE: `${BASEURL}/challenge/delete`
   },
   TASK: {
     CREATE: `${BASEURL}/task/create`,

@@ -13,6 +13,7 @@ export interface IChallengeService extends IRootService<ApiResponse<IChallenge>>
   attachLevelAndTrack(body: IChallengeConfig): Observable<ApiResponse<string>>;
   getChallengeFormDetail(challengeId: string): Observable<ApiResponse<IChallengeFormDetail>>;
   getChallengeDetail(challengeId: string): Observable<ApiResponse<IChallengeDetail>>;
+  deleteChallenge(challengeId: string): Observable<ApiResponse<string>>;
 }
 
 @Injectable({
@@ -45,6 +46,11 @@ export class ChallengeService extends RootService<ApiResponse<any>> implements I
   getChallengeDetail(challengeId: string): Observable<ApiResponse<IChallengeDetail>> {
     return this.get(challengeId, routes.CHALLENGE.DETAIL)
         .pipe(map(res => res as ApiResponse<IChallengeDetail>), catchError(ErrorHandler.ErrorServerConnection));
+  }
+
+  deleteChallenge(challenge: string): Observable<ApiResponse<string>> {
+    return this.delete(challenge, routes.CHALLENGE.DELETE)
+        .pipe(map(res => res as ApiResponse<string>), catchError(ErrorHandler.ErrorServerConnection));
   }
 
 }

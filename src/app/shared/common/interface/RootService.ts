@@ -59,8 +59,8 @@ export class RootService<T extends IRootObject> implements IRootService<T> {
     );
   }
 
-  delete(item: any, url: string) {
-    return this.httpClient.delete(`${url}/${item.id}`);
+  delete(id: any, url: string) {
+    return this.httpClient.delete(`${url}/${id}`);
   }
 
   get(id: any, url: string): Observable<T> {
