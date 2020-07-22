@@ -14,6 +14,7 @@ import { CreateTaskComponent } from './task/create-task/create-task.component';
 import { TaskComponent } from './task/task.component';
 import { ListTaskComponent } from './task/list-task/list-task.component';
 import { DetailComponent } from './challenge/detail/detail.component';
+import { EditChallengeComponent } from './challenge/edit-challenge/edit-challenge.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { DetailComponent } from './challenge/detail/detail.component';
       CreateTaskComponent,
       TaskComponent,
       ListTaskComponent,
-      DetailComponent
+      DetailComponent,
+      EditChallengeComponent
   ],
   imports: [
     CommonModule,

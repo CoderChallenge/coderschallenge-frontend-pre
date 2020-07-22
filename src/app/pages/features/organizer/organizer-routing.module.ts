@@ -9,6 +9,7 @@ import { TaskComponent } from '@pages/features/organizer/task/task.component';
 import { CreateTaskComponent } from '@pages/features/organizer/task/create-task/create-task.component';
 import { ListTaskComponent } from '@pages/features/organizer/task/list-task/list-task.component';
 import { DetailComponent } from '@pages/features/organizer/challenge/detail/detail.component';
+import { EditChallengeComponent } from '@pages/features/organizer/challenge/edit-challenge/edit-challenge.component';
 
 
 const routes: Routes = [
@@ -40,6 +41,10 @@ const routes: Routes = [
       {
         path: 'detail/:id',
         component: DetailComponent
+      },
+      {
+        path: 'edit/:id',
+        component: EditChallengeComponent
       },
     ]
   },

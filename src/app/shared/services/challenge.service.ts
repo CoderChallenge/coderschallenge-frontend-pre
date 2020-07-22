@@ -9,6 +9,7 @@ import { ErrorHandler } from '@app/shared/common/Error/ErrorHandler';
 
 export interface IChallengeService extends IRootService<ApiResponse<IChallenge>>{
   createChallenge(body: IChallenge): Observable<ApiResponse<IChallenge>>;
+  updateChallenge(body: IChallenge, challengeId: string): Observable<ApiResponse<IChallenge>>;
   attachLevelAndTrack(body: IChallengeConfig): Observable<ApiResponse<string>>;
   getChallengeFormDetail(challengeId: string): Observable<ApiResponse<IChallengeFormDetail>>;
   getChallengeDetail(challengeId: string): Observable<ApiResponse<IChallengeDetail>>;
@@ -26,6 +27,11 @@ export class ChallengeService extends RootService<ApiResponse<any>> implements I
     return this.post(routes.CHALLENGE.CONFIG, body)
       .pipe(map(res => res as ApiResponse<string>), catchError(ErrorHandler.ErrorServerConnection));
     }
+
+  updateChallenge(body: IChallenge, challengeId: string): Observable<ApiResponse<IChallenge>> {
+    return this.post(`${routes.CHALLENGE.EDIT}/${challengeId}`, body)
+        .pipe(map(res => res), catchError(ErrorHandler.ErrorServerConnection));
+  }
 
   createChallenge(body: IChallenge): Observable<ApiResponse<IChallenge>> {
     return this.post(routes.CHALLENGE.CREATE, body)

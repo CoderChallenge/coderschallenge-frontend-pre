@@ -11,11 +11,11 @@
                                 <h5 class="card-title font-18">{{item.title}}</h5>
                                 <div class="button-list mt-5">
                                     <a href="https://www.facebook.com/sharer/sharer.php?u={{encodedText(item.link)}}&t={{item.title}}&display=popup" target="_blank" rel="noopener noreferrer" class="btn btn-primary-rgba font-18"><i class="feather icon-facebook"></i></a>
-                                    <a href="https://twitter.com/intent/tweet?text={{item.title}}&url={{encodedText(item.link)}}&hashtags={{item.timeline}}DaysChallenge,codeChallengers,community" target="_blank" rel="noopener noreferrer" class="btn btn-info-rgba font-18"><i class="feather icon-twitter"></i></a>
+                                    <a href="https://twitter.com/intent/tweet?text={{item.title}}&url={{encodedText(item.link)}}&hashtags={{item.timeline}}DaysChallenge,codersChallenge,community" target="_blank" rel="noopener noreferrer" class="btn btn-info-rgba font-18"><i class="feather icon-twitter"></i></a>
                                     <a href="https://wa.me/?text={{encodedText('Hi,' +'I will be participating in the *#'+item.timeline+item.title?.replace(' ', '')+'Challenge*.  I\'m inviting you to register by clicking the link '+ item.link)}}" data-action="share/whatsapp/share"  target="_blank" rel="noopener noreferrer" class="btn btn-success-rgba font-18"><i class="feather socicon-whatsapp"></i></a>
                                     <a href="https://www.linkedin.com/shareArticle?mini=true&url={{encodedText(item.link)}}&title={{encodedText(item.link)}}&summary={{encodedText(item.description?.substring(0,300))}}&source={{appUrl}}" target="_blank" rel="noopener noreferrer" class="btn btn-info font-18"><i class="feather icon-linkedin"></i></a>
                                 </div>
-                                <p class="card-text"><small class="text-muted">Created on {{item.created_at | date:'short'}}</small></p>
+                                <p class="card-text"><small class="text-muted">Created on {{item.created_at | date:'dd-MM-y'}}</small></p>
                             </div>
                         </div>
 
@@ -52,7 +52,7 @@
                         <p class="text-black">
                             <span *ngFor="let track of item.tracks" class="ml-2 font-13 font-weight-bold">{{track.name}},</span>
                         </p>
-                        <p class="mt-5 mb-5">
+                        <p class="mt-5">
                             <span class="font-14 font-weight-bold text-black"><i class="dripicons-checklist"></i> Level</span>
                         </p>
                         <p class="text-black">
