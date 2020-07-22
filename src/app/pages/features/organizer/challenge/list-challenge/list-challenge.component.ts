@@ -7,6 +7,7 @@ import { ChallengeService } from '@app/shared/services/challenge.service';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IChallenge, IChallengeList } from '@app/shared/common/model/IChallenge';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-list-challenge',
@@ -15,7 +16,7 @@ import { IChallenge, IChallengeList } from '@app/shared/common/model/IChallenge'
 })
 export class ListChallengeComponent extends BaseComponent implements OnInit {
 items: IChallengeList[];
-  constructor(router: Router, titleService: Title, private challengeService: ChallengeService) {
+  constructor(router: Router, titleService: Title, private challengeService: ChallengeService, private modalService: NgbModal) {
     super(null, router, null, titleService, challengeService );
   }
   ngOnInit() {
@@ -37,6 +38,13 @@ items: IChallengeList[];
     }, (error: HttpErrorResponse) => {
       this.waiting = false;
       this.challengeService.showError(error.statusText);
+    });
+  }
+
+  remove(item, modal) {
+    this.modalService.open(modal, { ariaLabelledBy: 'modal-basic-title', centered: true })
+        .result.then((result) => {
+    }, (reason) => {
     });
   }
 

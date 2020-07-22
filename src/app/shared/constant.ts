@@ -14,7 +14,8 @@ export const routes = {
     CONFIG: `${BASEURL}/challenge/attach`,
     LIST: `${BASEURL}/challenge/get-all`,
     FORMDETAIL: `${BASEURL}/challenge/formdetail`,
-    DETAIL: `${BASEURL}/challenge/details`
+    DETAIL: `${BASEURL}/challenge/details`,
+    EDIT: `${BASEURL}/challenge/edit`
   },
   TASK: {
     CREATE: `${BASEURL}/task/create`,

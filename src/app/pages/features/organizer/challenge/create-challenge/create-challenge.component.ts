@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { AlertCssClass, BaseComponent, IconCssClass, routes } from '@app/shared';
 import { FileService } from '@app/shared/services/file.service';

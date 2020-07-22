@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { AuthInterceptor } from '@app/shared/interceptors/AuthInterceptor';
 import { environment } from '@src/environments/environment';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateAdapter, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -21,8 +21,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    SocialLoginModule,
-    NgbModule
+    SocialLoginModule
   ],
   providers: [
     {
@@ -42,7 +41,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    {provide: NgbDateAdapter, useClass: NgbDateNativeAdapter},
   ],
   bootstrap: [AppComponent]
 })

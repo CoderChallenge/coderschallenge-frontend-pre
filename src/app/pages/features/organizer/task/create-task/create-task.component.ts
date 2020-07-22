@@ -84,12 +84,12 @@ export class CreateTaskComponent extends BaseComponent implements OnInit {
     this.filename = file.name;
     if (!Utils.isValidFileSize(file)){
       this.fileError = true;
-     this.fileErrorMessage = 'File size is too large';
+      this.fileErrorMessage = 'File size is too large';
       return false;
     }
     if (!Utils.fileValidator(file, true)) {
       this.fileError = true;
-     this.fileErrorMessage = 'File format not valid, only file with png,jpg is allowed';
+      this.fileErrorMessage = 'File format not valid, only file with png,jpg is allowed';
       return false;
     }
     this.isImage = true;

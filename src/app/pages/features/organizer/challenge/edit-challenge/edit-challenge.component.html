@@ -1,0 +1,106 @@
+<div class="row d-flex justify-content-center align-items-start animated fadeIn">
+    <div class="col-md-7 m-auto">
+        <div class="card m-b-30">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Edit Challenge</h5>
+            </div>
+            <div class="card-body">
+                <form class="create-challenge-form" #f="ngForm" (ngSubmit)="submitForm()">
+
+                    <div class="form-group">
+                        <!-- Title -->
+                        <label for="title">Title</label>
+                        <input [ngClass]="{
+              'text-danger': title.invalid && (title.dirty || title.touched),
+              'text-success': title.valid && (title.dirty || title.touched) }"
+                               type="text"
+                               class="form-control create-challenge-form__input"
+                               id="title"
+                               name="title" required minlength="6"
+                               #title="ngModel" [(ngModel)]="item.title"
+                               aria-describedby="title input box"
+                               placeholder="Enter Title">
+                        <small *ngIf="title.errors?.required && (title.dirty || title.touched)"
+                               class="form-text text-danger"><i class=""></i>This field is required</small>
+                        <small *ngIf="title.errors?.minlength && (title.dirty || title.touched)"
+                               class="form-text text-danger"><i class=""></i>Title
+                            must be at least 6 characters</small>
+                    </div>
+
+                    <!-- Duration of challenge -->
+                    <div class="row">
+                        <div class="col">
+                            <label for="start-date">Start Date</label>
+                            <input  [ngClass]="{
+              'text-danger': start_date.invalid && (start_date.dirty || start_date.touched),
+              'text-success': start_date.valid && (start_date.dirty || start_date.touched) }"
+                                    id="start-date"
+                                    type="date"
+                                    name="start_date" required
+                                    #start_date="ngModel" [(ngModel)]="item.start_date"
+                                    class="form-control create-challenge-form__input"
+                                    aria-describedby="start-date input box">
+                            <small *ngIf="start_date.errors?.required && (start_date.dirty || start_date.touched)"
+                                   class="form-text text-danger"><i class=""></i>This field is required</small>
+                        </div>
+                        <div class="col">
+                            <label for="end-date">End Date</label>
+                            <input [ngClass]="{
+              'text-danger': end_date.invalid && (end_date.dirty || end_date.touched),
+              'text-success': end_date.valid && (end_date.dirty || end_date.touched) }"
+                                   id="end-date"
+                                   type="date"
+                                   name="end_date" required
+                                   #end_date="ngModel" [(ngModel)]="item.end_date"
+                                   class="form-control create-challenge-form__input"
+                                   aria-describedby="end-date input box">
+                            <small *ngIf="end_date.errors?.required && (end_date.dirty || end_date.touched)"
+                                   class="form-text text-danger"><i class=""></i>This field is required</small>
+                        </div>
+                    </div>
+
+                    <!-- challenge featured photo/banner -->
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label for="challenge-photo">Challenge Featured Photo/Banner</label>
+                            <input type="file"
+                                   required
+                                   class="form-control create-challenge-form__input create-challenge-form__file"
+                                   (change)="onFileChange($event)" #uploader
+                                   name="challenge-photo" id="challenge-photo"/>
+                            <small *ngIf="fileErrorMessage"
+                                   class="form-text text-danger"><i class=""></i>{{fileErrorMessage}}</small>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label for="description">Description</label>
+                            <textarea [ngClass]="{
+              'text-danger': description.invalid && (description.dirty || description.touched),
+              'text-success': description.valid && (description.dirty || description.touched) }"
+                                      class="form-control create-challenge-form__input"
+                                      name="description" rows="5" required
+                                      #description="ngModel" [(ngModel)]="item.description"
+                                      id="description"
+                                      placeholder="What is the challenge all about?"></textarea>
+                            <small *ngIf="description.errors?.required && (description.dirty || description.touched)"
+                                   class="form-text text-danger"><i class=""></i>This field is required</small>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-4">
+                        <div class="col justify-content-center">
+                            <btn-loading [disabled]="!f.valid || waiting || fileError " [loadingText]="'Loading'"
+                                         [loading]="waiting"
+                                         [btnClass]="'btn btn-block bg--primary text--white submit-button create-challenge-form__submit-button'">
+                                Save changes <i class="fa fa-arrow-right"></i>
+                            </btn-loading>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
