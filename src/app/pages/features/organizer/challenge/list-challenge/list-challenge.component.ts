@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { BaseComponent, routes } from '@app/shared';
 import { ChallengeService } from '@app/shared/services/challenge.service';
-import { ToastrService } from 'ngx-toastr';
-import { HttpErrorResponse } from '@angular/common/http';
-import { IChallenge, IChallengeList } from '@app/shared/common/model/IChallenge';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { IChallengeList } from '@app/shared/common/model/IChallenge';
 
 @Component({
   selector: 'app-list-challenge',

@@ -128,8 +128,8 @@
 </div>
 <app-loader [isLoadingData]="waiting"></app-loader>
 <ng-template #deleteConfirmModal let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-title">Delete Challenge</h4>
+    <div class="modal-header bg-light">
+        <h4 class="modal-title text-muted" id="modal-title">Delete Challenge</h4>
         <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -138,7 +138,7 @@
         <p><strong>Are you sure you want to do this?</strong></p>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary btn-rounded" (click)="modal.dismiss('cancel')">Cancel</button>
-        <button type="button" ngbAutofocus class="btn btn-wide btn-danger btn-rounded" (click)="modal.close('Ok')">Ok</button>
+        <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel')">Cancel</button>
+        <button type="button" ngbAutofocus class="btn btn-wide btn-danger" (click)="modal.close('Ok')">Delete</button>
     </div>
 </ng-template>
