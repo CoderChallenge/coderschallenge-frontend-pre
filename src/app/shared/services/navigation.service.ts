@@ -60,8 +60,8 @@ export class NavigationService {
       name: 'Dashboard',
       type: 'link',
       tooltip: 'Dashboard',
-      icon: 'fa fa-home',
-      state: '/organizer/dashboard'
+      icon: 'dashboard.svg',
+      state: '/user/dashboard'
     },
     {
       name: 'Challenge',
