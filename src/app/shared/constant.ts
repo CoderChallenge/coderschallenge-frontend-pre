@@ -16,7 +16,7 @@ export const routes = {
     FORMDETAIL: `${BASEURL}/challenge/formdetail`,
     DETAIL: `${BASEURL}/challenge/details`,
     EDIT: `${BASEURL}/challenge/edit`,
-    DELETE: `${BASEURL}/challenge/delete`
+    DELETE: `${BASEURL}/challenge/delete`,
   },
   TASK: {
     CREATE: `${BASEURL}/task/create`,
@@ -33,6 +33,10 @@ export const routes = {
     ALL: `${BASEURL}/track/get-all`,
     CREATE: `${BASEURL}/track/create`,
     UPDATE: `${BASEURL}/track/edit`,
+  },
+  PARTICIPANT: {
+    JOIN: `${BASEURL}/challenge/join`,
+    LIST: `${BASEURL}/track/list`
   },
   CLOUDINARY: `https://api.cloudinary.com/v1_1/eskye/image/upload`
 };

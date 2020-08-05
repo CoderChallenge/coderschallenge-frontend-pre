@@ -1,0 +1,112 @@
+<div class="row">
+    <!-- Start col -->
+    <div class="col-md-8 col-lg-12 col-xl-12">
+        <div class="card m-b-30">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-xl-5">
+                        <div class="card">
+                            <img class="img-fluid col-md-10 col-sm-12" src="{{item.image_url ? item.image_url : 'assets/images/svg-icon/no-image.svg'}}" alt="{{item.title}}">
+                            <div class="card-body">
+                                <h5 class="card-title font-18">{{item.title}}</h5>
+                                <p class="card-text"><small class="text-muted">Created on {{item.created_at | date:'dd-MM-y'}}</small></p>
+                                <div class="button-list mt-2">
+                                    <button type="button" [ngbTooltip]="item.hasRegistered ? 'You have already joined this challenge' : ''" [disabled]="item.hasRegistered" (click)="!item.hasRegistered ? open(modalLevel) : ''" [ngClass]="{'btn-primary':item.hasRegistered, 'btn-success':!item.hasRegistered}" class="btn btn-lg btn-block border-0 btn-"><i [class]="item.hasRegistered ? 'feather icon-check' : 'feather icon-arrow-right'"></i> {{item.hasRegistered ? 'Joined' : 'Join Challenge'}} </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-xl-7">
+                        <p>
+                            <span class="font-14 font-weight-bold text-black"><i class="feather icon-calendar"></i> Duration</span>
+                        </p>
+                        <dl class="row text-black">
+                            <dt class="col-sm-3 font-12 f-w-7 my-2">Start Date</dt>
+                            <dt class="col-sm-9 font-12 f-w-7 my-2"> {{item.start_date | date:'medium'}}</dt>
+                            <dt class="col-sm-3 font-12 f-w-7 my-2">End Date</dt>
+                            <dt class="col-sm-9 font-12 f-w-7 my-2"> {{item.end_date | date:'medium'}}</dt>
+                            <dt class="col-sm-4 font-12 f-w-7 my-2">Number Of Days </dt>
+                            <dt class="col-sm-8 font-12 f-w-7 my-2"> {{item.timeline }}</dt>
+                        </dl>
+
+                        <p class="mt-5">
+                            <span class="font-14 font-weight-bold text-black"><i class="dripicons-graph-bar"></i> Tracks</span>
+                        </p>
+                        <p class="text-black">
+                            <span *ngFor="let track of item.tracks" class="ml-2 font-13 font-weight-bold">{{track.name}},</span>
+                        </p>
+                        <p class="mt-5">
+                            <span class="font-14 font-weight-bold text-black"><i class="dripicons-checklist"></i> Level</span>
+                        </p>
+                        <p class="text-black">
+                            <span *ngFor="let level of item.levels" class="ml-2 font-13 font-weight-bold">{{level.name}},</span>
+                        </p>
+
+                        <p class="mt-5">
+                            <span class="font-14 font-weight-bold text-black"><i class="feather icon-book-open"></i> Description</span>
+                        </p>
+                        <p class="mb-4 text-truncate">{{item.description}}</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End col -->
+</div>
+<app-loader [isLoadingData]="waiting"></app-loader>
+
+<ng-template #modalLevel let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Join challenge</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #f="ngForm" (ngSubmit)="signupChallenge(f)">
+            <div class="col">
+                <label for="track">Track</label>
+                <select id="track" class="form-control create-challenge-form__input" name="track" [ngClass]="{
+              'text-danger': track.invalid && (track.dirty || track.touched),
+              'text-success': track.valid && (track.dirty || track.touched) }"
+                        #track="ngModel" [(ngModel)]="joinChallengeModel.trackId">
+                    <option [ngValue]="0" disabled>select track for this task</option>
+                    <option *ngFor="let track of item?.tracks" [ngValue]="track.id">{{track.name}}</option>
+                </select>
+                <small *ngIf="track.errors?.required && (track.dirty || track.touched)"
+                       class="form-text text-danger"><i class=""></i>This field is required</small>
+            </div>
+
+            <div class="col">
+                <label for="level">Level</label>
+                <select id="level" class="form-control create-challenge-form__input" name="level" [ngClass]="{
+              'text-danger': level.invalid && (level.dirty || level.touched),
+              'text-success': level.valid && (level.dirty || level.touched) }"
+                        #level="ngModel" [(ngModel)]="joinChallengeModel.levelId">
+                    <option [ngValue]="0" disabled>select level for this task</option>
+                    <option *ngFor="let level of item?.levels" [ngValue]="level.id">{{level.name}}</option>
+                </select>
+                <small *ngIf="level.errors?.required && (level.dirty || level.touched)"
+                       class="form-text text-danger"><i class=""></i>This field is required</small>
+            </div>
+
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <btn-loading
+                [btnClass]="'btn btn-rounded btn-outline-dark'"
+                [loading]="waiting"
+                [type]="'button'"
+                [disabled]="waiting || item.tracks.length == 0 && item.levels.length == 0"
+                [loadingText]="'Loading...'"
+                (click)="item.tracks.length > 0 && item.levels.length > 0 ? signupChallenge(f) : ''">
+            <i class="feather icon-send"></i> Submit
+        </btn-loading>
+    </div>
+</ng-template>
+

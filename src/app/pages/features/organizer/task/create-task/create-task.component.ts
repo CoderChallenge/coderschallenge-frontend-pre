@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { IChallenge, IChallengeFormDetail } from '@app/shared/common/model/IChallenge';
+import { IChallengeFormDetail } from '@app/shared/common/model/IChallenge';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FileService } from '@app/shared/services/file.service';
 import { ChallengeService } from '@app/shared/services/challenge.service';
 import { Utils } from '@app/shared/utils';
-import { Helpers } from '@app/shared/helpers';
-import { AlertCssClass, BaseComponent, IconCssClass, routes } from '@app/shared';
+import { BaseComponent, routes } from '@app/shared';
 import { environment } from '@src/environments/environment';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { TaskService } from '@app/shared/services/task.service';
 import { ITask } from '@app/shared/common/model/ITask';
-import { ILevel } from '@app/shared/common/model/ILevel';
 import { Title } from '@angular/platform-browser';
 
 @Component({

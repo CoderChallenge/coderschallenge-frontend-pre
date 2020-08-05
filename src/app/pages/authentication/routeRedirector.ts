@@ -11,7 +11,7 @@ export class RouteRedirector {
                 this.router.navigate(['/organizer/dashboard']);
                 break;
             case UserTypes.participant:
-                this.router.navigate(['/participant/dashboard']);
+                this.router.navigate(['/user/dashboard']);
                 break;
             case UserTypes.admin:
                 this.router.navigate(['/admin/dashboard']);

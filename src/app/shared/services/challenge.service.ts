@@ -2,7 +2,14 @@ import { Injectable, Injector } from '@angular/core';
 import { IRootService, IUser, RootService, routes } from '@app/shared';
 import { ApiResponse } from '@app/shared/common/interface/IRootObject';
 import { Observable } from 'rxjs/internal/Observable';
-import { IChallenge, IChallengeConfig, IChallengeDetail, IChallengeFormDetail, IChallengeList } from '@app/shared/common/model/IChallenge';
+import {
+  IChallenge,
+  IChallengeConfig,
+  IChallengeDetail,
+  IChallengeFormDetail,
+  IChallengeList,
+  IJoinChallenge
+} from '@app/shared/common/model/IChallenge';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { ErrorHandler } from '@app/shared/common/Error/ErrorHandler';
@@ -14,6 +21,7 @@ export interface IChallengeService extends IRootService<ApiResponse<IChallenge>>
   getChallengeFormDetail(challengeId: string): Observable<ApiResponse<IChallengeFormDetail>>;
   getChallengeDetail(challengeId: string): Observable<ApiResponse<IChallengeDetail>>;
   deleteChallenge(challengeId: string): Observable<ApiResponse<string>>;
+  joinChallenge(body: IJoinChallenge): Observable<ApiResponse<string>>;
 }
 
 @Injectable({
@@ -24,6 +32,10 @@ export class ChallengeService extends RootService<ApiResponse<any>> implements I
     super(httpClient, inject);
   }
 
+  joinChallenge(body: IJoinChallenge): Observable<ApiResponse<string>> {
+    return this.post(routes.PARTICIPANT.JOIN, body)
+        .pipe(map(res => res as ApiResponse<string>), catchError(ErrorHandler.ErrorServerConnection));
+  }
   attachLevelAndTrack(body: IChallengeConfig): Observable<ApiResponse<string>> {
     return this.post(routes.CHALLENGE.CONFIG, body)
       .pipe(map(res => res as ApiResponse<string>), catchError(ErrorHandler.ErrorServerConnection));

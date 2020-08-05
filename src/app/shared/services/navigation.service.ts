@@ -60,16 +60,16 @@ export class NavigationService {
       name: 'Dashboard',
       type: 'link',
       tooltip: 'Dashboard',
-      icon: 'fa fa-home',
-      state: '/organizer/dashboard'
+      icon: 'dashboard.svg',
+      state: '/user/dashboard'
     },
     {
       name: 'Challenge',
       type: 'link',
       tooltip: 'Challenge',
-      icon: 'fa fa-code',
-      state: '/organizer/challenge/create'
-    },
+      icon: 'basic.svg',
+      state: '/user/challenge'
+    }
   ];
   // sets iconMenu as default;
   menuItems = new BehaviorSubject<IMenuItem[]>(this.organizerMenu);
