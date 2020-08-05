@@ -34,7 +34,7 @@ export const routes = {
     CREATE: `${BASEURL}/track/create`,
     UPDATE: `${BASEURL}/track/edit`,
   },
-  PARTICIPANT:{
+  PARTICIPANT: {
     JOIN: `${BASEURL}/challenge/join`,
     LIST: `${BASEURL}/track/list`
   },
