@@ -38,10 +38,16 @@ export interface IChallengeDetail extends IChallengeFormDetail{
   link: string;
   tasks_count: number;
   created_at: string | Date;
+  hasRegistered: boolean;
 }
 
 export interface IParticipants {
   Male: number;
   Female: number;
+}
+export interface IJoinChallenge {
+  trackId: number;
+  levelId: number;
+  challengeId: string;
 }
 

@@ -67,9 +67,9 @@ export class NavigationService {
       name: 'Challenge',
       type: 'link',
       tooltip: 'Challenge',
-      icon: 'fa fa-code',
-      state: '/organizer/challenge/create'
-    },
+      icon: 'basic.svg',
+      state: '/user/challenge'
+    }
   ];
   // sets iconMenu as default;
   menuItems = new BehaviorSubject<IMenuItem[]>(this.organizerMenu);

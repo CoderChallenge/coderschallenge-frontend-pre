@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BaseComponent, ISignupComplete } from '@app/shared';
 import { IAlert } from '@app/shared/common/model/IAlert';
 import { NgForm } from '@angular/forms';
-import { IChallengeDetail } from '@app/shared/common/model/IChallenge';
+import { IChallengeDetail, IJoinChallenge } from '@app/shared/common/model/IChallenge';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 import { ChallengeService } from '@app/shared/services/challenge.service';
@@ -15,8 +15,11 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 })
 export class SignupChallengeComponent extends BaseComponent implements OnInit {
   item: IChallengeDetail;
-  challengeId: string;
-  copiedStatus: boolean;
+  joinChallengeModel: IJoinChallenge = {
+    levelId: 0,
+    trackId: 0,
+    challengeId: ''
+};
   private modalRef: NgbModalRef;
   constructor(router: Router, activatedRoute: ActivatedRoute, titleService: Title,
               private challengeService: ChallengeService, private meta: Meta, private modalService: NgbModal) {
@@ -24,13 +27,13 @@ export class SignupChallengeComponent extends BaseComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.challengeId = this.getParamValue('id');
+    this.joinChallengeModel.challengeId = this.getParamValue('id');
     await this.getChallengeDetail();
   }
 
   async getChallengeDetail(){
     this.waiting = true;
-    this.challengeService.getChallengeDetail(this.challengeId).subscribe(res => {
+    this.challengeService.getChallengeDetail(this.joinChallengeModel.challengeId).subscribe(res => {
       this.item = res.data;
       this.meta.addTags([
         {name: 'og:title', content: this.item.title},
@@ -45,23 +48,6 @@ export class SignupChallengeComponent extends BaseComponent implements OnInit {
     });
   }
 
-  copyText(inputElement: HTMLInputElement){
-    this.copiedStatus = false;
-    inputElement.select();
-    document.execCommand('copy');
-    inputElement.setSelectionRange(0, 0);
-    this.copiedStatus = true;
-  }
-
-  encodedText(text: string): string{
-    return encodeURIComponent(text);
-  }
-
-  get appUrl(){
-    return window.location.href;
-  }
-
-
   open(content, item = null) {
     this.modalRef  = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title'});
     this.modalRef.result.then((result) => {
@@ -72,6 +58,14 @@ export class SignupChallengeComponent extends BaseComponent implements OnInit {
   }
 
   signupChallenge(f: NgForm) {
-    
+    this.challengeService.joinChallenge(this.joinChallengeModel).subscribe(res => {
+      this.waiting = false;
+      this.challengeService.showSuccess(res.data);
+      this.item.hasRegistered = true;
+      this.modalRef.close();
+    }, error => {
+      this.waiting = false;
+      this.challengeService.showError(error);
+    });
   }
 }
