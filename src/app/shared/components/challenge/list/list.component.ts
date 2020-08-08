@@ -20,7 +20,6 @@ export class ListComponent extends BaseComponent implements OnInit {
   @Output() deleteChallenge = new EventEmitter<any>();
   @Input() waiting = false;
   @Input() role: string;
-  private modalRef: NgbModalRef;
   constructor(router: Router,   private modalService: NgbModal,
               private emitService: EmitService, private challengeService: ChallengeService) {
     super(null, router, null, null, challengeService);

@@ -1,9 +1,5 @@
-import { IRootObject } from '../interface';
-
-export interface IDashboard extends IRootObject {
-    courses?: number ;
-    mentors?: number;
-    paths?: number;
-    students?: number;
-
+export interface IDashboard {
+    challengeCount: number;
+    taskCount: number;
+    submissionCount: number;
 }

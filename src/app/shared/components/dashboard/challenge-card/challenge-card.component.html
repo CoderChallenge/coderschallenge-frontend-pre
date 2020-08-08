@@ -1,0 +1,28 @@
+
+    <div class="card m-b-30">
+        <div class="card-header">
+            <div class="row align-items-center">
+                <div class="col-7">
+                    <h5 class="card-title mb-0">Latest Challenges</h5>
+                </div>
+                <div class="col-5">
+                    <button class="btn btn-secondary-rgba float-right font-13" (click)="goTo('/organizer/challenge/list')">View All</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="activities-history">
+                <p  class="text-danger" *ngIf="items?.length == 0">There are no challenges yet. </p>
+                <div class="activities-history-list" *ngFor="let item of items">
+                    <div class="activities-history-item">
+                        <h6 class="font-13">
+                            <a routerLink="/organizer/challenge/detail/{{item.uid}}">
+                                {{item.title}}
+                            </a>
+                        </h6>
+                        <p class="mb-0">{{ item.created_at | relativeTime}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
