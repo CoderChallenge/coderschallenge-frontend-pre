@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { OrganizerRoutingModule } from './organizer-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -36,7 +36,8 @@ import { EditChallengeComponent } from './challenge/edit-challenge/edit-challeng
     FormsModule,
     SharedComponentsModule,
     NgbModule,
-    OrganizerRoutingModule
-  ]
+    OrganizerRoutingModule,
+  ],
+    providers: [NgbActiveModal]
 })
 export class OrganizerModule { }
