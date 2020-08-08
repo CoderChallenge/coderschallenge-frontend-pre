@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from '@pages/features/organizer/dashboard/dashboard.component';
-import { SignupChallengeComponent } from '@pages/features/participant/signup-challenge/signup-challenge.component';
-
+import { DashboardComponent } from '@pages/features/participant/dashboard/dashboard.component';
+import { ListComponent } from '@pages/features/participant/challenge/list/list.component';
 
 const routes: Routes = [
   {
@@ -13,6 +12,10 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent
+  },
+  {
+    path: 'challenges',
+    component: ListComponent
   }
 ];
 

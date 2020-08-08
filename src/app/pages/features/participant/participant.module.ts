@@ -7,10 +7,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedComponentsModule } from '@app/shared/components/shared-components.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SignupChallengeComponent } from './signup-challenge/signup-challenge.component';
+import { ListComponent } from './challenge/list/list.component';
 
 
 @NgModule({
-  declarations: [DashboardComponent, SignupChallengeComponent],
+  declarations: [DashboardComponent, SignupChallengeComponent, ListComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

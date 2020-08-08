@@ -19,4 +19,5 @@ export interface IRootService<T extends IRootObject> {
     successAlert(msg, title?);
     errorAlert(msg, title?);
     warningAlert(msg: any, title?: any);
+    getService(service: T): T;
 }

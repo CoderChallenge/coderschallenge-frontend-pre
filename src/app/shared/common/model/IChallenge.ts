@@ -23,6 +23,8 @@ export interface IChallengeList extends IChallenge{
   status: string;
   timeline: number;
   participants_count: number;
+  image_url: string;
+  description: string;
 }
 
 export interface IChallengeFormDetail extends IChallenge{

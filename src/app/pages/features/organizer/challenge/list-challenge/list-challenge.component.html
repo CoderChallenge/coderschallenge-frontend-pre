@@ -1,144 +1,143 @@
-<div class="row">
-    <!-- Start col -->
+<app-shared-challenge-list
+        [items]="items"
+        [role]="userType"
+        [waiting]="waiting"
+        (entryCount)="count($event)"
+        (filterAction)="init($event)"
+        (deleteChallenge)="deleteChallenge($event)"
+        (reload)="refresh()"
+>
 
-    <div class="col-lg-12 col-md-12 col-12 col-sm-12">
-        <div class="card m-b-25">
-            <div class="row align-items-center mt-3 mb-3">
-                <div class="col-md-12 col-12 col-sm-12">
-                    <form class="form-inline">
-                        <div class="form-group col-md-3 col-sm-12">
-                            <input type="date" name="dateFrom" [(ngModel)]="filter.dateFrom" class="form-control w-100" placeholder="From"/>
-                        </div>
-                        <div class="form-group col-md-3 col-sm-12">
-                            <input type="date" name="dateTo" class="form-control w-100" [(ngModel)]="filter.dateTo" placeholder="To"/>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <select class="form-control w-100" (change)="init()" name="status" [(ngModel)]="filter.status">
-                                <option value="" selected aria-selected="true" disabled>Status</option>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
-                            </select>
-                        </div>
-                        <div class="button-list mt-2 ml-3">
-                            <button type="button" (click)="init()" class="btn btn-primary border-0  font-12"><i class="feather icon-filter"></i> Filter</button>
-                            <button type="button" (click)="reloadComponent()" class="btn btn-primary border-0 font-12"><i class="feather  icon-refresh-ccw"></i> Reload</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="card m-b-30">
-            <div class="card-header">
-                <div class="row align-items-center">
-                    <div class="col-6">
-                        <h5 class="card-title mb-0">List Of Challenges</h5>
-                        <ul class="list-inline-group float-left text-right mt-3 mb-0 pl-0">
-                            <li class="list-inline-item">
-                                <div class="form-group mb-0 amount-spent-select">
-                                    <select name="count" [(ngModel)]="paginationConfig.count" (change)="init()" class="form-control" id="formControlSelect">
-                                        <option *ngFor="let size of sizes" [value]="size">{{size}}</option>
-                                    </select>
+</app-shared-challenge-list>
 
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="list-inline-group text-right mb-0 pl-0">
-                            <li class="list-inline-item">
-                                <div class="button-list mt-2 ml-3">
-                                    <button type="button" routerLink="/organizer/challenge/create" class="btn btn-primary border-0 btn-"><i class="feather icon-plus"></i> New Challenge </button>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-borderless font-13">
-                        <thead class="thead-default">
-                        <tr>
-                            <th>Title</th>
-                            <th>Participants</th>
-                            <th>Duration</th>
-                            <th>Status</th>
-                            <th>Date Created</th>
-                            <th>Tasks</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr *ngFor="let item of items; let i=index" >
 
-                            <td class="font-13">{{item.title}}</td>
-                            <td>{{item.participants_count}}</td>
-                            <td>
-                                <h6 class="font-13">{{item.timeline}} Day(s)</h6>
-                                <p class="font-10 text-success">{{item.start_date | date:'dd-MM-y'}} - {{item.end_date | date:'dd-MM-y'}}</p>
-                            </td>
-                            <td><span class="badge "  [ngClass]="{'badge-success-inverse':item.status == 'Active','badge-danger-inverse': item.status != 'Active'}">{{item.status}}</span></td>
-                            <td>{{item.created_at | date:'dd-MM-y'}}</td>
-                            <td>{{item.tasks_count}}</td>
-                            <td>
-                                <div class="button-list">
-                                    <div class="btn-group mr-1">
-                                        <div class="dropdown">
-                                            <button class="btn btn-round btn-primary-rgba" type="button" id="CustomdropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-more-vertical-"></i></button>
-                                            <div class="dropdown-menu" aria-labelledby="CustomdropdownMenuButton3" style="">
-                                                <a class="dropdown-item" routerLink="/organizer/challenge/detail/{{item.uid}}"><i class="feather icon-eye -1 mr-2"></i>Detail</a>
-                                                <a class="dropdown-item" routerLink="/organizer/challenge/edit/{{item.uid}}"><i class="feather icon-edit-1 mr-2"></i>Edit</a>
-                                                <a class="dropdown-item" routerLink="/organizer/task/list/{{item.uid}}"><i class="feather icon-eye-off mr-2"></i>View Tasks</a>
-                                                <a class="dropdown-item" href="#"><i class="feather icon-users mr-2"></i>Participants</a>
-                                                <a class="dropdown-item" (click)="remove(item, deleteConfirmModal)"  href="javascript:;"><i class="feather icon-trash-2 mr-2"></i>Delete</a>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <h3 *ngIf="items?.length === 0" class="lead text-danger text-center">No record to display</h3>
-                </div>
+<!--<div class="row">-->
+<!--    &lt;!&ndash; Start col &ndash;&gt;-->
 
-            </div>
-            <div class="card-footer">
-                <div class="col-md-12">
-                    <div class="col-md-4 float-left">
-                        <p class="font-12">{{getPageInfoDescription()}}</p>
-                    </div>
-                    <div class="col-md-6 float-right">
-                        <ngb-pagination class="d-flex justify-content-end"
-                                        [collectionSize]="paginationConfig.total"
-                                        [maxSize]="3" [pageSize]="paginationConfig.count"
-                                        [boundaryLinks]="true"
-                                        [directionLinks]="true"
-                                        (pageChange)="pageChanged($event)"
-                                        [(page)]="paginationConfig.page"
-                                        aria-label="Default pagination"
-                                        size="sm"></ngb-pagination>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End col -->
-</div>
-<app-loader [isLoadingData]="waiting"></app-loader>
-<ng-template #deleteConfirmModal let-modal>
-    <div class="modal-header bg-light">
-        <h4 class="modal-title text-muted" id="modal-title">Delete Challenge</h4>
-        <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <p><strong>Are you sure you want to do this?</strong></p>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel')">Cancel</button>
-        <button type="button" ngbAutofocus class="btn btn-wide btn-danger" (click)="modal.close('Ok')">Delete</button>
-    </div>
-</ng-template>
+<!--    <div class="col-lg-12 col-md-12 col-12 col-sm-12">-->
+<!--        <div class="card m-b-25">-->
+<!--            <div class="row align-items-center mt-3 mb-3">-->
+<!--                <div class="col-md-12 col-12 col-sm-12">-->
+<!--                    <form class="form-inline">-->
+<!--                        <div class="form-group col-md-3 col-sm-12">-->
+<!--                            <input type="date" name="dateFrom" [(ngModel)]="filter.dateFrom" class="form-control w-100" placeholder="From"/>-->
+<!--                        </div>-->
+<!--                        <div class="form-group col-md-3 col-sm-12">-->
+<!--                            <input type="date" name="dateTo" class="form-control w-100" [(ngModel)]="filter.dateTo" placeholder="To"/>-->
+<!--                        </div>-->
+<!--                        <div class="form-group col-md-3">-->
+<!--                            <select class="form-control w-100" (change)="init()" name="status" [(ngModel)]="filter.status">-->
+<!--                                <option value="" selected aria-selected="true" disabled>Status</option>-->
+<!--                                <option value="active">Active</option>-->
+<!--                                <option value="inactive">Inactive</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                        <div class="button-list mt-2 ml-3">-->
+<!--                            <button type="button" (click)="init()" class="btn btn-primary border-0  font-12"><i class="feather icon-filter"></i> Filter</button>-->
+<!--                            <button type="button" (click)="reloadComponent()" class="btn btn-primary border-0 font-12"><i class="feather  icon-refresh-ccw"></i> Reload</button>-->
+<!--                        </div>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="card m-b-30">-->
+<!--            <div class="card-header">-->
+<!--                <div class="row align-items-center">-->
+<!--                    <div class="col-6">-->
+<!--                        <h5 class="card-title mb-0">List Of Challenges</h5>-->
+<!--                        <ul class="list-inline-group float-left text-right mt-3 mb-0 pl-0">-->
+<!--                            <li class="list-inline-item">-->
+<!--                                <div class="form-group mb-0 amount-spent-select">-->
+<!--                                    <select name="count" [(ngModel)]="paginationConfig.count" (change)="init()" class="form-control" id="formControlSelect">-->
+<!--                                        <option *ngFor="let size of sizes" [value]="size">{{size}}</option>-->
+<!--                                    </select>-->
+
+<!--                                </div>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                    <div class="col-6">-->
+<!--                        <ul class="list-inline-group text-right mb-0 pl-0">-->
+<!--                            <li class="list-inline-item">-->
+<!--                                <div class="button-list mt-2 ml-3">-->
+<!--                                    <button type="button" routerLink="/organizer/challenge/create" class="btn btn-primary border-0 btn-"><i class="feather icon-plus"></i> New Challenge </button>-->
+<!--                                </div>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="card-body">-->
+<!--                <div class="table-responsive">-->
+<!--                    <table class="table table-borderless font-13">-->
+<!--                        <thead class="thead-default">-->
+<!--                        <tr>-->
+<!--                            <th>Title</th>-->
+<!--                            <th>Participants</th>-->
+<!--                            <th>Duration</th>-->
+<!--                            <th>Status</th>-->
+<!--                            <th>Date Created</th>-->
+<!--                            <th>Tasks</th>-->
+<!--                            <th>Actions</th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                        <tr *ngFor="let item of items; let i=index" >-->
+
+<!--                            <td class="font-13">{{item.title}}</td>-->
+<!--                            <td>{{item.participants_count}}</td>-->
+<!--                            <td>-->
+<!--                                <h6 class="font-13">{{item.timeline}} Day(s)</h6>-->
+<!--                                <p class="font-10 text-success">{{item.start_date | date:'dd-MM-y'}} - {{item.end_date | date:'dd-MM-y'}}</p>-->
+<!--                            </td>-->
+<!--                            <td><span class="badge "  [ngClass]="{'badge-success-inverse':item.status == 'Active','badge-danger-inverse': item.status != 'Active'}">{{item.status}}</span></td>-->
+<!--                            <td>{{item.created_at | date:'dd-MM-y'}}</td>-->
+<!--                            <td>{{item.tasks_count}}</td>-->
+<!--                            <td>-->
+<!--                                <div class="button-list">-->
+<!--                                    <div class="btn-group mr-1">-->
+<!--                                        <div class="dropdown">-->
+<!--                                            <button class="btn btn-round btn-primary-rgba" type="button" id="CustomdropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-more-vertical-"></i></button>-->
+<!--                                            <div class="dropdown-menu" aria-labelledby="CustomdropdownMenuButton3" style="">-->
+<!--                                                <a class="dropdown-item" routerLink="/organizer/challenge/detail/{{item.uid}}"><i class="feather icon-eye -1 mr-2"></i>Detail</a>-->
+<!--                                                <a class="dropdown-item" routerLink="/organizer/challenge/edit/{{item.uid}}"><i class="feather icon-edit-1 mr-2"></i>Edit</a>-->
+<!--                                                <a class="dropdown-item" routerLink="/organizer/task/list/{{item.uid}}"><i class="feather icon-eye-off mr-2"></i>View Tasks</a>-->
+<!--                                                <a class="dropdown-item" href="#"><i class="feather icon-users mr-2"></i>Participants</a>-->
+<!--                                                <a class="dropdown-item" (click)="remove(item, deleteConfirmModal)"  href="javascript:;"><i class="feather icon-trash-2 mr-2"></i>Delete</a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+
+<!--                                </div>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                    <h3 *ngIf="items?.length === 0" class="lead text-danger text-center">No record to display</h3>-->
+<!--                </div>-->
+
+<!--            </div>-->
+<!--            <div class="card-footer">-->
+<!--                <div class="col-md-12">-->
+<!--                    <div class="col-md-4 float-left">-->
+<!--                        <p class="font-12">{{getPageInfoDescription()}}</p>-->
+<!--                    </div>-->
+<!--                    <div class="col-md-6 float-right">-->
+<!--                        <ngb-pagination class="d-flex justify-content-end"-->
+<!--                                        [collectionSize]="paginationConfig.total"-->
+<!--                                        [maxSize]="3" [pageSize]="paginationConfig.count"-->
+<!--                                        [boundaryLinks]="true"-->
+<!--                                        [directionLinks]="true"-->
+<!--                                        (pageChange)="pageChanged($event)"-->
+<!--                                        [(page)]="paginationConfig.page"-->
+<!--                                        aria-label="Default pagination"-->
+<!--                                        size="sm"></ngb-pagination>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; End col &ndash;&gt;-->
+<!--</div>-->
+<!--<app-loader [isLoadingData]="waiting"></app-loader>-->

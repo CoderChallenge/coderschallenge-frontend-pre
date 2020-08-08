@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Title } from '@angular/platform-browser';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { BaseComponent, routes } from '@app/shared';
@@ -11,23 +10,20 @@ import { EmitService } from '@app/shared/services/emit.service';
 import { AuthenticationService } from '@app/shared/services/authentication.service';
 
 @Component({
-  selector: 'app-list-challenge',
-  templateUrl: './list-challenge.component.html',
-  styleUrls: ['./list-challenge.component.scss']
+  selector: 'app-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.scss']
 })
-export class ListChallengeComponent extends BaseComponent implements OnInit {
-items: IChallengeList[];
-userType: string;
-  private modalRef: NgbModalRef;
-  constructor(router: Router, titleService: Title, private emitService: EmitService, private authService: AuthenticationService,
-              private challengeService: ChallengeService,
-              private modalService: NgbActiveModal) {
-    super(null, router, null, titleService, challengeService );
+export class ListComponent extends BaseComponent implements OnInit {
+  items: IChallengeList[];
+   userType: string;
+  constructor(router: Router, titleService: Title, private emitService: EmitService,
+              private authService: AuthenticationService,
+              private challengeService: ChallengeService) {
+    super(null, router, null, titleService, challengeService);
   }
-
   ngOnInit() {
-    this.titleRoute('List of challenges');
-    this.filter.status = '';
+    this.titleRoute('List of challenge');
     this.init();
     this.userType = this.authService.role;
   }
@@ -35,7 +31,7 @@ userType: string;
   init(filter?: any) {
     this.filter = filter ? filter : {};
     this.waiting = true;
-    this.url = routes.CHALLENGE.LIST;
+    this.url = routes.PARTICIPANT.LIST;
     this.query = {
       size: this.paginationConfig.count,
       whereCondition: this.formatQueryString()
@@ -57,16 +53,5 @@ userType: string;
   refresh(event?) {
     this.reloadComponent();
   }
-  deleteChallenge(item: IChallengeList){
-    this.waiting = true;
-    this.challengeService.deleteChallenge(item.uid).subscribe(res => {
-      this.waiting = false;
-      this.init();
-      this.challengeService.showSuccess(res.data);
-      this.modalService.close();
-    }, error => {
-      this.waiting = false;
-      this.challengeService.showError(error);
-    });
-  }
+
 }

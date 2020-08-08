@@ -104,6 +104,11 @@ export class RootService<T extends IRootObject> implements IRootService<T> {
     return this.inject.get<MatSnackBar>(MatSnackBar);
   }
 
+  getService(service: T): T {
+    // @ts-ignore
+    return this.inject.get<T>(T) as T;
+  }
+
   showSuccess(message: string): void {
     this.snackBar.open(message, 'X', {panelClass: ['success']});
   }

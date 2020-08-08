@@ -61,6 +61,7 @@ export class NavigationService {
       type: 'link',
       tooltip: 'Dashboard',
       icon: 'dashboard.svg',
+      stateName: 'dashboard',
       state: '/user/dashboard'
     },
     {
@@ -68,6 +69,7 @@ export class NavigationService {
       type: 'link',
       tooltip: 'Challenge',
       icon: 'basic.svg',
+      stateName: 'challenge',
       state: '/user/challenge'
     }
   ];
