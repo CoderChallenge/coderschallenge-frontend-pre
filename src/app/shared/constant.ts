@@ -38,6 +38,9 @@ export const routes = {
     JOIN: `${BASEURL}/challenge/join`,
     LIST: `${BASEURL}/participant/get-joined-challenges`
   },
+  DASHBOARD: {
+    ORGANIZER: `${BASEURL}/dashboard/organizer`
+  },
   CLOUDINARY: `https://api.cloudinary.com/v1_1/eskye/image/upload`
 };
 

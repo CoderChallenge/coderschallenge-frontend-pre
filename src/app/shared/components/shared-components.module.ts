@@ -12,19 +12,21 @@ import { ListComponent } from '@app/shared/components/challenge/list/list.compon
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { SharedPipesModule } from '@app/shared/pipes/shared-pipes.module';
+import { ChallengeCardComponent } from '@app/shared/components/dashboard/challenge-card/challenge-card.component';
 
 const components =  [
      ButtonComponent,
      FooterComponent,
      LoaderComponent,
      AlertComponentComponent,
-    ListComponent,
+     ListComponent,
+     ChallengeCardComponent,
      MustMatchDirective
 ];
 
 @NgModule({
-  declarations: components,
-  exports: components,
+    declarations: [...components],
+    exports: [...components],
   imports: [
     CommonModule,
     RouterModule,
